@@ -1,0 +1,2473 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>C++ tutorial for C users</title>
+    <meta name="Author" content="Eric Brasseur">
+    <meta name="date" content="19980223">
+    <meta name="created" content="19980223">
+    <meta name="changed" content="20121124">
+    <meta name="Description" content="Quick C++ tutorial for C
+      programmers.">
+    <meta name="language" content="EN">
+    <meta name="type" content="software">
+    <meta name="typename1" content="">
+    <meta name="typename2" content="">
+    <meta name="toindex" content="1">
+    <meta name="untried" content="0">
+   <script type="text/javascript">
+   /* <![CDATA[ */
+       (function() {
+           var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
+           s.type = 'text/javascript';
+           s.async = true;
+           s.src = 'http://api.flattr.com/js/0.6/load.js?mode=auto';
+           t.parentNode.insertBefore(s, t);
+       })();
+   /* ]]> */
+   </script>
+  </head>
+  <body>
+<div align="right">
+<font face="sans">
+&nbsp;
+<a href="index.html">Home</a>
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+<a href="index_donate.html"><img src="index_paypal_donate.gif" alt="Donate" border=0 width=75 height=21></a>
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+<a class="FlattrButton" style="display:none;" rev="flattr;button:compact;" href="http://www.4p8.com/eric.brasseur"></a>
+<noscript><a href="http://flattr.com/thing/291800/Eric-Brasseur" target="_blank">
+<img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a></noscript>
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+<a href="mailto:eric.brasseur@gmail.com">Contact</a>
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+</font>
+</div>
+<hr><br>
+    <h1>C++ tutorial for C users</h1>
+    <br>
+    <br>
+    <br>
+    <br>
+    <!--A printed version is available at <a href="http://www.lulu.com/content/258714">http://www.lulu.com/content/258714</a>-->This
+text
+shows
+and
+highlights
+features
+and
+basic
+principles
+of
+C++.
+It
+is
+aimed
+at
+
+    experienced C users who wish to learn C++. You will be able to
+    express your code using the richer C++ syntax and you will be able
+    to read some C++ code.<br>
+    <br>
+    Though the concept is introduced and made usable, this is not a
+    tutorial about Object Oriented Programming. You will still have to
+    learn the spirit of OOP and the details of its implementation in
+    C++, in order to be a true C++ programmer.<br>
+    <br>
+    If you don't have a C++ compiler at hand, maybe try to use online
+    tools like this one: <a href="http://codepad.org">http://codepad.org</a><br>
+    <br>
+    <br>
+    <br>
+    <ul>
+      <ul>
+        <ol>
+          <li><a href="#l1">A new way to include libraries</a> <br>
+            <br>
+          </li>
+          <li><a href="#l2"><b>//</b> for one-line remarks</a> <br>
+            <br>
+          </li>
+          <li><a href="#l3">Console input and output streams</a> <br>
+            <br>
+          </li>
+          <li><a href="#l4">Variable declarations can be put inside the
+              code without using hooks</a> <br>
+            <br>
+          </li>
+          <li><a href="#l5">Variables can be initialised by a
+              calculation involving other variables</a> <br>
+            <br>
+          </li>
+          <li><a href="#l6">Variables can be declared inside a <b>for</b>
+              loop declaration</a> <br>
+            <br>
+          </li>
+          <li><a href="#l7">Global variables can be accessed even if a
+              local variables have the same name</a> <br>
+            <br>
+          </li>
+          <li><a href="#l8">It is possible to declare a REFERENCE to
+              another variable</a> <br>
+            <br>
+          </li>
+          <li><a href="#l9">Namespaces can be declared</a> <br>
+            <br>
+          </li>
+          <li><a href="#l10">A function can be declared <b>inline</b></a>
+            <br>
+            <br>
+          </li>
+          <li><a href="#l11">The <b>exception</b> structure has been
+              added</a> <br>
+            <br>
+          </li>
+          <li><a href="#l12">A function can have default parameters</a>
+            <br>
+            <br>
+          </li>
+          <li><a href="#l13">FUNCTION OVERLOAD: several functions can be
+              declared with the same name provided there is a difference
+              in their parameter list</a> <br>
+            <br>
+          </li>
+          <li><a href="#l14">The symbolic operators (<b>+ - * /</b> ...)
+              can be defined for new data types</a> <br>
+            <br>
+          </li>
+          <li><a href="#l15">Different functions for different data
+              types will automatically be generated provided you define
+              a <b>template</b> function</a> <br>
+            <br>
+          </li>
+          <li><a href="#l16">The keywords <b>new</b> and <b>delete</b>
+              are much better to allocate and deallocate memory</a> <br>
+            <br>
+          </li>
+          <li><a href="#l17">You can add METHODS To a <b>class</b> or
+              struct </a><br>
+            <br>
+          </li>
+          <li><a href="#l18">The CONSTRUCTOR and the DESTRUCTOR can be
+              used to initialise and destroy an instance of a class</a>
+            <br>
+            <br>
+          </li>
+          <li><a href="#l19">Complex classes need the COPY CONSTRUCTOR
+              and an overload of the <b>=</b> operator</a> <br>
+            <br>
+          </li>
+          <li><a href="#l20">The method bodies can be defined below the
+              class definition (and Makefile usage example</a>)<br>
+            <br>
+          </li>
+          <li><a href="#l21">The keyword <b>this</b> is a pointer to
+              the instance a method is acting upon</a> <br>
+            <br>
+          </li>
+          <li><a href="#l22">Arrays of instances can be declared</a> <br>
+            <br>
+          </li>
+          <li><a href="#l23">An example of a complete class declaration</a>
+            <br>
+            <br>
+          </li>
+          <li><a href="#l24"><b>static</b> variables inside a class
+              definition</a> <br>
+            <br>
+          </li>
+          <li><a href="#l25"><b>const</b> variables inside a class
+              definition</a> <br>
+            <br>
+          </li>
+          <li><a href="#l26">A class can be DERIVED from another class</a>
+            <br>
+            <br>
+          </li>
+          <li><a href="#l27">If a method is declared <b>virtual</b> the
+              program will always check the type of the instance that is
+              pointed to and will use the appropriate method.</a> <br>
+            <br>
+          </li>
+          <li><a href="#l28">A class can be derived from more than one
+              base class</a> <br>
+            <br>
+          </li>
+          <li><a href="#l29">Class derivation allows you to write
+              generic methods</a> <br>
+            <br>
+          </li>
+          <li><a href="#l30">ENCAPSULATION: <b>public</b>, <b>protected</b>
+              and <b>private</b></a> <br>
+            <br>
+          </li>
+          <li><a href="#l31">Brief examples of file I/O</a> <br>
+            <br>
+          </li>
+          <li><a href="#l32">Character arrays can be used like files</a>
+            <br>
+            <br>
+          </li>
+          <li><a href="#l33">An example of formatted output</a> <br>
+            <br>
+          </li>
+        </ol>
+      </ul>
+    </ul>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <a name="l1"></a><font color="#0f0000" size="+4">1.&nbsp;</font><br>
+    <br>
+    There is a new way to <span style="font-weight: bold;">#include</span>
+    libraries (the old method still works yet the compiler complains).
+    The <b>.h</b> extension is not used any more, and the names of
+    standard C libraries are written beginning with a <b>c</b>. In
+    order for the program to use these libraries correctly <b>using
+      namespace std;</b> has to be added:<br>
+    <br>
+    <br>
+    <b> </b>
+    <pre><span style="color: rgb(255, 0, 0);"><b>using namespace std;</b></span><b><br>#include &lt;iostream&gt;        <span style="color: rgb(153, 153, 153);">// This is a key C++ library</span><br>#include &lt;<span style="color: rgb(255, 0, 0);">c</span>math&gt;           <span style="color: rgb(153, 153, 153);">// The standard C library math.h</span><br><br>int main ()<br>{<br>   double a;<br><br>   a = 1.2;<br>   a = sin (a);<br><br>   cout &lt;&lt; a &lt;&lt; endl;<br><br>   return 0;<br>}<br><br><br></b></pre>
+    <div align="right">
+      <table style="text-align: left;" border="1" cellpadding="8"
+        cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;
+              background-color: rgb(204, 204, 204);"><small
+                style="font-weight: bold;"><span style="font-family:
+                  sans-serif;">Output</span></small><br>
+            </td>
+          </tr>
+          <tr style="font-family: monospace;">
+            <td style="vertical-align: top;"><b>0.932039</b></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <b><br>
+      <br>
+    </b>A few hints for beginners:<br>
+    <br>
+    To compile this program, type it (or copy &amp; paste it) into a
+    text editor (gedit, kwrite, kate, kedit, vi, emacs, nano, pico,
+    mcedit, Notepad...),&nbsp; save it as a file named, say <span
+      style="font-family: sans-serif;">test01.cpp</span> (if you are a
+    newbie, best put this file inside your home directory, that is, for
+    example <span style="font-family: sans-serif;">/home/jones</span>
+    on a Unix-like box).<br>
+    <br>
+    To compile the source code file, type this command (on most
+    open-source Unix-like boxes) in a console or terminal window:<br>
+    <br>
+    <span style="font-family: monospace;">g++ test01.cpp -o test01</span><br>
+    <br>
+    To run the binary executable file <span style="font-family:
+      sans-serif;">test01</span> that has been produced by the
+    compilation (assuming there were no errors), type this:<br>
+    <br>
+    <span style="font-family: monospace;">./test01</span><br>
+    <b><br>
+    </b>Each time you modify the <span style="font-family: sans-serif;">test01.cpp</span>
+    source code file, you need to compile it again if you want the
+    modifications to be reflected in the <span style="font-family:
+      sans-serif;">test01</span> executable file (type the up-arrow key
+    on your keyboard to recall commands). <b><br>
+      <br>
+    </b><br>
+    <br>
+    <br>
+    <br>
+    <a name="l2"></a><font color="#0f0000" size="+4">2.&nbsp;</font><br>
+    <br>
+    You can use&nbsp; <span style="font-weight: bold; font-family:
+      serif;">//</span>&nbsp; to type a remark: <br>
+    <br>
+    <b><br>
+    </b>
+    <pre><b>using namespace std;         <span style="color: rgb(255, 0, 0);">//</span> <span style="color: rgb(153, 153, 153);">Using the standard library namespace.</span><br>#include &lt;iostream&gt;          <span style="color: rgb(255, 0, 0);">//</span> <span style="color: rgb(153, 153, 153);">The iostream library is often used.</span><br><br>int main ()                  <span style="color: rgb(255, 0, 0);">//</span> <span style="color: rgb(153, 153, 153);">The program's main routine.</span><br>{<br>   double a;                 <span style="color: rgb(255, 0, 0);">//</span> <span style="color: rgb(153, 153, 153);">Declaration of variable a.</span><br><br>   a = 456.47;<br>   a = a + a * 21.5 / 100;   <span style="color: rgb(255, 0, 0);">//</span> <span style="color: rgb(153, 153, 153);">A calculation.</span><br><br>   cout &lt;&lt; a &lt;&lt; endl;        <span style="color: rgb(255, 0, 0);">//</span> <span style="color: rgb(153, 153, 153);">Display the content of a.</span><br><br>   return 0;                 <span style="color: rgb(255, 0, 0);">//</span> <span style="color: rgb(153, 153, 153);">Program end.</span><br>}</b><br><br><br></pre>
+    <div align="right">
+      <table style="text-align: left;" border="1" cellpadding="8"
+        cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;
+              background-color: rgb(204, 204, 204);"><small
+                style="font-weight: bold;"><span style="font-family:
+                  sans-serif;">Output</span></small><br>
+            </td>
+          </tr>
+          <tr style="font-family: monospace;">
+            <td style="vertical-align: top;"><b>554.611</b></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <br>
+    <br>
+    (The possibility to use&nbsp; <span style="font-weight: bold;
+      font-family: serif;">//</span>&nbsp; to type remarks has been
+    added to C in C99 and ANSI C 2000.)<br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <a name="l3"></a><font color="#0f0000" size="+4">3.&nbsp;</font><br>
+    <br>
+    Input from the keyboard and output to the screen can be performed
+    through <b>cout&nbsp;&lt;&lt;</b> and <b>cin&nbsp;&gt;&gt;</b>: <br>
+    <br>
+    <b><br>
+      <pre>using namespace std;<br>#include &lt;iostream&gt;<br><br>int main()<br>{<br>   int a;                    <span style="color: rgb(153, 153, 153);">// a is an integer variable</span><br>   char s [100];             <span style="color: rgb(153, 153, 153);">// s points to a string of max 99 characters</span><br><br>   <span style="color: rgb(255, 0, 0);">cout &lt;&lt; "This is a sample program." &lt;&lt; endl;</span><br><br>   cout &lt;&lt; endl;             <span style="color: rgb(153, 153, 153);">// Just a line feed (</span><span style="color: rgb(255, 102, 102);">end</span> <span style="color: rgb(153, 153, 153);">of</span> <span style="color: rgb(255, 102, 102);">l</span><span style="color: rgb(153, 153, 153);">ine)</span><br><br>   cout &lt;&lt; "Type your age&nbsp;: ";<br>   <span style="color: rgb(255, 0, 0);">cin &gt;&gt; a;</span><br><br>   cout &lt;&lt; "Type your name: ";<br>   cin &gt;&gt; s;<br><br>   cout &lt;&lt; endl;<br><br>   <span style="color: rgb(255, 0, 0);">cout &lt;&lt; <span style="color: rgb(0, 0, 0);">"Hello "</span> &lt;&lt; <span style="color: rgb(0, 0, 0);">s</span> &lt;&lt; <span style="color: rgb(0, 0, 0);">" you're "</span> &lt;&lt; <span style="color: rgb(0, 0, 0);">a</span> &lt;&lt; <span style="color: rgb(0, 0, 0);">" old."</span> &lt;&lt; endl;</span><br>   cout &lt;&lt; endl &lt;&lt; endl &lt;&lt; "Bye!" &lt;&lt; endl;<br><br>   return 0;<br>}<br><br></pre>
+    </b>
+    <div align="right">
+      <table style="text-align: left;" border="1" cellpadding="8"
+        cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;
+              background-color: rgb(204, 204, 204);"><small
+                style="font-weight: bold;"><span style="font-family:
+                  sans-serif;">Output</span></small><br>
+            </td>
+          </tr>
+          <tr style="font-family: monospace;">
+            <td style="vertical-align: top;"><b>This is a sample
+                program.<br>
+                <br>
+                Type your age&nbsp;: 12<br>
+                Type your name:
+                Edmond&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
+                <br>
+                Hello Edmond you're 12 old.<br>
+                <br>
+                <br>
+                Bye!<br>
+              </b></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <b><br>
+    </b><br>
+    <br>
+    <br>
+    <a name="l4"></a><font color="#0f0000" size="+4">4.&nbsp;</font><br>
+    <br>
+    Variables can be declared anywhere inside the code: <br>
+    <br>
+    <br>
+    <pre><b>using namespace std;<br>#include &lt;iostream&gt;<br><br>int main ()<br>{<br>   double a;<br><br>   cout &lt;&lt; "Hello, this is a test program." &lt;&lt; endl;<br><br>   cout &lt;&lt; "Type parameter a: ";<br>   cin &gt;&gt; a;<br>                                                                                                 </b><br><b>   a = (a + 1) / 2;<br><br>   <span style="color: rgb(255, 0, 0);">double c;</span><br><br>   c = a * 5 + 1;<br><br>   cout &lt;&lt; "c contains     &nbsp;: " &lt;&lt; c &lt;&lt; endl;<br><br>   <span style="color: rgb(255, 0, 0);">int i, j;</span><br><br>   i = 0;<br>   j = i + 1;<br><br>   cout &lt;&lt; "j contains     &nbsp;: " &lt;&lt; j &lt;&lt; endl;<br><br>   return 0;<br>}<br></b><br><br></pre>
+    <div align="right">
+      <table style="text-align: left;" border="1" cellpadding="8"
+        cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;
+              background-color: rgb(204, 204, 204);"><small
+                style="font-weight: bold;"><span style="font-family:
+                  sans-serif;">Output</span></small><br>
+            </td>
+          </tr>
+          <tr style="font-family: monospace;">
+            <td style="vertical-align: top;"><b>Hello, this is a test
+                program.<br>
+                Type parameter a: 7<br>
+                c contains&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: 21<br>
+                j contains&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: 1<br>
+              </b></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <br>
+    <br>
+    Maybe try to use this feature to make your source code more readable
+    and not to mess it up.<b><br>
+    </b>Like in C, variables can be encapsulated between { } blocks.
+    Then they are local in scope to the zone encapsulated between the {
+    and }. Whatever happens with such variables inside the encapsulated
+    zone will have no effect outside the zone: <br>
+    <br>
+    <b><br>
+      <pre>using namespace std;<br>#include &lt;iostream&gt;<br><br>int main ()<br>{<br>   double a;<br><br>   cout &lt;&lt; "Type a number: ";<br>   cin &gt;&gt; a;<br><br>   <span style="color: rgb(255, 0, 0);">{</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">      int a = 1;</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">      a = a * 10 + 4;</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">      cout &lt;&lt; "Local number: " &lt;&lt; a &lt;&lt; endl;</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">   }</span><br><br>   cout &lt;&lt; "You typed: " &lt;&lt; a &lt;&lt; endl;<br><br>   return 0;<br>}<br><br><br></pre>
+    </b>
+    <div align="right">
+      <table style="text-align: left;" border="1" cellpadding="8"
+        cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;
+              background-color: rgb(204, 204, 204);"><small
+                style="font-weight: bold;"><span style="font-family:
+                  sans-serif;">Output</span></small><br>
+            </td>
+          </tr>
+          <tr style="font-family: monospace;">
+            <td style="vertical-align: top;"><b>Type a number: 9<br>
+                Local number: 14<br>
+                You typed: 9<br>
+              </b></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <a name="l5"></a><font color="#0f0000" size="+4">5.&nbsp;</font><br>
+    <br>
+    A variable can be initialised by a calculation involving other
+    variables: <br>
+    <br>
+    <br>
+    <b>
+      <pre>using namespace std;<br>#include &lt;iostream&gt;<br><br>int main ()<br>{<br>   double a = 12 * 3.25;<br>   double b = <span style="color: rgb(255, 0, 0);">a + 1.112</span>;<br><br>   cout &lt;&lt; "a contains: " &lt;&lt; a &lt;&lt; endl;<br>   cout &lt;&lt; "b contains: " &lt;&lt; b &lt;&lt; endl;<br><br>   a = a * 2 + b;<br><br>   double c = <span style="color: rgb(255, 0, 0);">a + b * a</span>;<br><br>   cout &lt;&lt; "c contains: " &lt;&lt; c &lt;&lt; endl;<br><br>   return 0;<br>}<br><br><br></pre>
+    </b><b> </b>
+    <div align="right">
+      <table style="text-align: left;" border="1" cellpadding="8"
+        cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;
+              background-color: rgb(204, 204, 204);"><small
+                style="font-weight: bold;"><span style="font-family:
+                  sans-serif;">Output</span></small><br>
+            </td>
+          </tr>
+          <tr style="font-family: monospace;">
+            <td style="vertical-align: top;"><b>a contains: 39<br>
+                b contains: 40.112<br>
+                c contains: 4855.82<br>
+              </b></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <b><br>
+    </b><br>
+    <br>
+    <br>
+    <a name="l6"></a><font color="#0f0000" size="+4">6.&nbsp;</font><br>
+    <br>
+    C++ allows you to declare a variable to be local to a loop: <br>
+    <br>
+    <b><br>
+    </b>
+    <pre><b>using namespace std;<br>#include &lt;iostream&gt;<br><br>int main ()<br>{   <br>   int i;                       <span style="color: rgb(153, 153, 153);">// Simple declaration of i</span><br>   i = 487;<br><br>   for (<span style="color: rgb(255, 0, 0);">int </span>i = 0; i &lt; 4; i++)  <span style="color: rgb(153, 153, 153);">// Local declaration of i </span><br>   {<br>      cout &lt;&lt; i &lt;&lt; endl;        <span style="color: rgb(153, 153, 153);">// This outputs 0, 1, 2 and 3</span><br>   }<br><br>   cout &lt;&lt; i &lt;&lt; endl;           <span style="color: rgb(153, 153, 153);">// This outputs 487</span><br><br>   return 0;<br>}<br><br><br></b></pre>
+    <div align="right">
+      <table style="text-align: left;" border="1" cellpadding="8"
+        cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;
+              background-color: rgb(204, 204, 204);"><small
+                style="font-weight: bold;"><span style="font-family:
+                  sans-serif;">Output</span></small><br>
+            </td>
+          </tr>
+          <tr style="font-family: monospace;">
+            <td style="vertical-align: top;"><b>0<br>
+                1<br>
+                2<br>
+                3<br>
+                487<br>
+              </b></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <b><br>
+    </b><b> <br>
+    </b>In case the variable is not declared somewhere above the loop,
+    you may be tempted to use it below the loop. Some early C++
+    compilers accept this. Then the variable has the value it had when
+    the loop ended. You shouldn't do this. It's considered bad practice:<br>
+    <br>
+    <b><br>
+      <pre>using namespace std;<br>#include &lt;iostream&gt;<br><br>int main ()<br>{<br><br>   for (int i = 0; i &lt; 4; i++)<br>   {<br>      cout &lt;&lt; i &lt;&lt; endl;<br>   }<br><br>   <span style="color: rgb(255, 0, 0);">cout &lt;&lt; i &lt;&lt; endl;</span>           <span style="color: rgb(153, 153, 153);">// Bad practice!</span><br>   <span style="color: rgb(255, 0, 0);">i += 5;</span>                      <span style="color: rgb(153, 153, 153);">// Bad practice!</span><br>   <span style="color: rgb(255, 0, 0);">cout &lt;&lt; i &lt;&lt; endl;</span>           <span style="color: rgb(153, 153, 153);">// Bad practice!</span><br><br>   return 0;<br>}<br><br><br></pre>
+    </b>
+    <div align="right">
+      <table style="text-align: left;" border="1" cellpadding="8"
+        cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;
+              background-color: rgb(204, 204, 204);"><small
+                style="font-weight: bold;"><span style="font-family:
+                  sans-serif;">Gnu C++ compiler complain</span></small><br>
+            </td>
+          </tr>
+          <tr style="font-family: monospace;">
+            <td style="vertical-align: top;"><b>t.cpp: In function ‘int
+                main()’:<br>
+                t.cpp:12: error: name lookup of ‘i’ changed for new ISO
+                ‘for’ scoping<br>
+                t.cpp:7: error:&nbsp;&nbsp; using obsolete binding at
+                ‘i’<br>
+              </b></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <b><br>
+    </b><br>
+    <br>
+    <br>
+    <a name="l7"></a><font color="#0f0000" size="+4">7.&nbsp;</font><br>
+    <br>
+    A global variable can be accessed even if another variable with the
+    same name has been declared inside the function: <br>
+    <br>
+    <b><br>
+      <pre>using namespace std;<br>#include &lt;iostream&gt;<br><br>double a = 128;<br><br>int main ()<br>{<br>   double a = 256;<br><br>   cout &lt;&lt; "Local a:  " &lt;&lt; a   &lt;&lt; endl;<br>   cout &lt;&lt; "Global a: " &lt;&lt; <span style="color: rgb(255, 0, 0);">::</span>a &lt;&lt; endl;<br><br>   return 0;<br>}<br><br><br></pre>
+    </b>
+    <div align="right">
+      <table style="text-align: left;" border="1" cellpadding="8"
+        cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;
+              background-color: rgb(204, 204, 204);"><small
+                style="font-weight: bold;"><span style="font-family:
+                  sans-serif;">Output</span></small><br>
+            </td>
+          </tr>
+          <tr style="font-family: monospace;">
+            <td style="vertical-align: top;"><b>Local a:&nbsp; 256<br>
+                Global a: 128<br>
+              </b></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <b><br>
+    </b><b> <br>
+    </b><br>
+    <br>
+    <a name="l8"></a><font color="#0f0000" size="+4">8.&nbsp;</font><br>
+    <br>
+    It is possible to make one variable be another: <br>
+    <br>
+    <b><br>
+      <pre>using namespace std;<br>#include &lt;iostream&gt;<br><br>int main ()<br>{<br>   double a = 3.1415927;<br><br>   <span style="color: rgb(255, 0, 0);">double &amp;b = a;</span>                            <span style="color: rgb(153, 153, 153);">// b</span> <span style="color: rgb(255, 102, 102);">is </span><span style="color: rgb(153, 153, 153);">a</span><br><br>   b = 89;<br><br>   cout &lt;&lt; "a contains: " &lt;&lt; a &lt;&lt; endl;     <span style="color: rgb(153, 153, 153);">// Displays 89.</span><br><br>   return 0;<br>}<br><br></pre>
+    </b>
+    <div align="right">
+      <table style="text-align: left;" border="1" cellpadding="8"
+        cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;
+              background-color: rgb(204, 204, 204);"><small
+                style="font-weight: bold;"><span style="font-family:
+                  sans-serif;">Output</span></small><br>
+            </td>
+          </tr>
+          <tr style="font-family: monospace;">
+            <td style="vertical-align: top;"><b>a contains: 89<br>
+              </b></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <b><br>
+    </b><b> <br>
+    </b>(If you are used to pointers and absolutely want to know what
+    happens, simply think <b>double &amp;b&nbsp;=&nbsp;a</b> is
+    translated to <b style="font-weight: bold;">double
+      *b&nbsp;=&nbsp;&amp;a</b> and all subsequent <b>b</b> are
+    replaced by <b>*b</b>.) <br>
+    <br>
+    The value of REFERENCE <b>b</b> cannot be changed after its
+    declaration. For example you cannot write, a few lines further, <b>&amp;b&nbsp;=&nbsp;c</b>
+    expecting that <b>b</b> is now <b>c</b>. It won't work. Everything
+    is said on the declaration line of <b>b</b>. Reference <b>b</b>
+    and variable <b>a</b> are married on that line and nothing will
+    separate them. <br>
+    <br>
+    References can be used to allow a function to modify a calling
+    variable: <br>
+    <br>
+    <b><br>
+      <pre>using namespace std;<br>#include &lt;iostream&gt;<br><br>void change (double <span style="color: rgb(255, 0, 0);">&amp;</span>r, double s)<br>{<br>   r = 100;<br>   s = 200;<br>}<br><br>int main ()<br>{<br>   double k, m;<br><br>   k = 3;<br>   m = 4;<br><br>   change (k, m);<br><br>   cout &lt;&lt; k &lt;&lt; ", " &lt;&lt; m &lt;&lt; endl;        <span style="color: rgb(153, 153, 153);">// Displays 100, 4.</span><br><br>   return 0;<br>}<br><br><br></pre>
+    </b>
+    <div align="right">
+      <table style="text-align: left;" border="1" cellpadding="8"
+        cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;
+              background-color: rgb(204, 204, 204);"><small
+                style="font-weight: bold;"><span style="font-family:
+                  sans-serif;">Output</span></small><br>
+            </td>
+          </tr>
+          <tr style="font-family: monospace;">
+            <td style="vertical-align: top;"><b>100, 4<br>
+              </b></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <b><br>
+    </b><b> <br>
+    </b>If you are used to pointers in C and wonder how exactly the
+    program above works, here is how the C++ compiler would translate it
+    to C: <br>
+    <br>
+    <b><br>
+      <pre>using namespace std;<br>#include &lt;iostream&gt;<br><br>void change (double *r, double s)<br>{<br>   *r = 100;<br>   s = 200;<br>}<br><br>int main ()<br>{<br>   double k, m;<br><br>   k = 3;<br>   m = 4;<br><br>   change (&amp;k, m);<br><br>   cout &lt;&lt; k &lt;&lt; ", " &lt;&lt; m &lt;&lt; endl;        <span style="color: rgb(153, 153, 153);">// Displays 100, 4.</span><br><br>   return 0;<br>}<br><br><br></pre>
+    </b>
+    <div align="right">
+      <table style="text-align: left;" border="1" cellpadding="8"
+        cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;
+              background-color: rgb(204, 204, 204);"><small
+                style="font-weight: bold;"><span style="font-family:
+                  sans-serif;">Output</span></small><br>
+            </td>
+          </tr>
+          <tr style="font-family: monospace;">
+            <td style="vertical-align: top;"><b>100, 4<br>
+              </b></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <b><br>
+    </b><b> <br>
+    </b>A reference can be used to let a function return a variable: <br>
+    <br>
+    <b><br>
+      <pre>using namespace std;<br>#include &lt;iostream&gt;<br><br>double <span style="color: rgb(255, 0, 0);">&amp;</span>biggest (double &amp;r, double &amp;s)<br>{<br>   if (r &gt; s) return r;<br>   else       return s;<br>}<br><br>int main ()<br>{<br>   double k = 3;<br>   double m = 7;<br><br>   cout &lt;&lt; "k: " &lt;&lt; k &lt;&lt; endl;       <span style="color: rgb(153, 153, 153);">// Displays  3</span><br>   cout &lt;&lt; "m: " &lt;&lt; m &lt;&lt; endl;       <span style="color: rgb(153, 153, 153);">// Displays  7</span><br>   cout &lt;&lt; endl;<br><br>   <span style="color: rgb(255, 0, 0);">biggest (k, m) = 10;</span><br><br>   cout &lt;&lt; "k: " &lt;&lt; k &lt;&lt; endl;       <span style="color: rgb(153, 153, 153);">// Displays  3</span><br>   cout &lt;&lt; "m: " &lt;&lt; m &lt;&lt; endl;       <span style="color: rgb(153, 153, 153);">// Displays 10</span><br>   cout &lt;&lt; endl;<br><br>   <span style="color: rgb(255, 0, 0);">biggest (k, m) ++;</span><br><br>   cout &lt;&lt; "k: " &lt;&lt; k &lt;&lt; endl;       <span style="color: rgb(153, 153, 153);">// Displays  3</span><br>   cout &lt;&lt; "m: " &lt;&lt; m &lt;&lt; endl;       <span style="color: rgb(153, 153, 153);">// Displays 11</span><br>   cout &lt;&lt; endl;<br><br>   return 0;<br>}<br><br><br></pre>
+    </b>
+    <div align="right">
+      <table style="text-align: left;" border="1" cellpadding="8"
+        cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;
+              background-color: rgb(204, 204, 204);"><small
+                style="font-weight: bold;"><span style="font-family:
+                  sans-serif;">Output</span></small><br>
+            </td>
+          </tr>
+          <tr style="font-family: monospace;">
+            <td style="vertical-align: top;"><b>k: 3<br>
+                m: 7<br>
+                <br>
+                k: 3<br>
+                m: 10<br>
+                <br>
+                k: 3<br>
+                m: 11<br>
+                <br>
+              </b></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <b><br>
+    </b><b> <br>
+    </b>Again, provided you're used to pointer arithmetic and if you
+    wonder how the program above works, just imagine that the compiler
+    translated it into the following standard C program: <br>
+    <br>
+    <b><br>
+    </b>
+    <pre><b>using namespace std;<br>#include &lt;iostream&gt;<br><br>double *biggest (double *r, double *s)<br>{<br>   if (*r &gt; *s) return r;<br>   else         return s;<br>}<br><br>int main ()<br>{<br>   double k = 3;<br>   double m = 7;<br><br>   cout &lt;&lt; "k: " &lt;&lt; k &lt;&lt; endl;<br>   cout &lt;&lt; "m: " &lt;&lt; m &lt;&lt; endl;<br>   cout &lt;&lt; endl;<br><br>   (*(biggest (&amp;k, &amp;m))) = 10;<br><br>   cout &lt;&lt; "k: " &lt;&lt; k &lt;&lt; endl;<br>   cout &lt;&lt; "m: " &lt;&lt; m &lt;&lt; endl;<br>   cout &lt;&lt; endl;<br><br>   (*(biggest (&amp;k, &amp;m))) ++;<br><br>   cout &lt;&lt; "k: " &lt;&lt; k &lt;&lt; endl;<br>   cout &lt;&lt; "m: " &lt;&lt; m &lt;&lt; endl;<br>   cout &lt;&lt; endl;<br><br>   return 0;<br>}<br><br><br></b></pre>
+    <div align="right">
+      <table style="text-align: left;" border="1" cellpadding="8"
+        cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;
+              background-color: rgb(204, 204, 204);"><small
+                style="font-weight: bold;"><span style="font-family:
+                  sans-serif;">Output</span></small><br>
+            </td>
+          </tr>
+          <tr style="font-family: monospace;">
+            <td style="vertical-align: top;"><b>k: 3<br>
+                m: 7<br>
+                <br>
+                k: 3<br>
+                m: 10<br>
+                <br>
+                k: 3<br>
+                m: 11<br>
+                <br>
+              </b></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <b><br>
+    </b><b> <br>
+    </b>To end with, for people who have to deal with pointers yet do
+    not like it, references are useful to effectively un-pointer
+    variables. Beware this is considered bad practice. You can get into
+    trouble. See for example <a
+      href="http://www.embedded.com/story/OEG20010311S0024">http://www.embedded.com/story/OEG20010311S0024</a>.
+    <br>
+    <br>
+    <b><br>
+      <pre>using namespace std;<br>#include &lt;iostream&gt;<br><br>double *silly_function ()    <span style="color: rgb(153, 153, 153);">// This function returns a pointer to a double</span><br>{<br>   static double r = 342;<br>   return &amp;r;<br>}<br><br>int main ()<br>{<br>   double *a;<br><br>   a = silly_function();<br><br>   <span style="color: rgb(255, 0, 0);">double &amp;b = *a;</span>          <span style="color: rgb(153, 153, 153);">// Now b</span> <span style="color: rgb(255, 102, 102);">is</span> <span style="color: rgb(153, 153, 153);">the double towards which a points!</span><br><br>   b += 1;                  <span style="color: rgb(153, 153, 153);">// Great!</span><br>   b = b * b;               <span style="color: rgb(153, 153, 153);">// No need to write *a everywhere!</span><br>   b += 4;<br><br>   cout &lt;&lt; "Content of *a, b and r: " &lt;&lt; b &lt;&lt; endl;<br><br>   return 0;<br>}<br><br><br></pre>
+    </b>
+    <div align="right">
+      <table style="text-align: left;" border="1" cellpadding="8"
+        cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;
+              background-color: rgb(204, 204, 204);"><small
+                style="font-weight: bold;"><span style="font-family:
+                  sans-serif;">Output</span></small><br>
+            </td>
+          </tr>
+          <tr style="font-family: monospace;">
+            <td style="vertical-align: top;"><b>Content of *a, b and r:
+                117653<br>
+              </b></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <b><br>
+    </b><br>
+    <br>
+    <br>
+    <a name="l9"></a><font color="#0f0000" size="+4">9.&nbsp;</font><br>
+    <br>
+    Namespaces can be declared. The variables declared within a
+    namespace can be used thanks to the <b>::</b> operator: <br>
+    <br>
+    <b><br>
+      <pre>using namespace std;<br>#include &lt;iostream&gt;<br>#include &lt;cmath&gt;<br><br>namespace first<br>{<br>   int a;<br>   int b;<br>}<br><br>namespace second<br>{<br>   double a;<br>   double b;<br>}<br><br>int main ()<br>{<br>   first::a = 2;<br>   first::b = 5;<br><br>   second::a = 6.453;<br>   second::b = 4.1e4;<br><br>   cout &lt;&lt; first::a + second::a &lt;&lt; endl;<br>   cout &lt;&lt; first::b + second::b &lt;&lt; endl;<br><br>   return 0;<br>}<br><br><br></pre>
+    </b>
+    <div align="right">
+      <table style="text-align: left;" border="1" cellpadding="8"
+        cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;
+              background-color: rgb(204, 204, 204);"><small
+                style="font-weight: bold;"><span style="font-family:
+                  sans-serif;">Output</span></small><br>
+            </td>
+          </tr>
+          <tr style="font-family: monospace;">
+            <td style="vertical-align: top;"><b>8.453<br>
+                41005<br>
+              </b></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <b><br>
+    </b><br>
+    <br>
+    <br>
+    <a name="l10"></a><font color="#0f0000" size="+4">10.&nbsp;</font><br>
+    <br>
+    If a function contains just simple lines of code, doesn't use <span
+      style="font-weight: bold;">for</span> loops or the like, it can be
+    declared <b>inline</b>. This means its code will be inserted
+    everywhere the function is used. That's somewhat like a macro. The
+    main advantage is the program will be faster. A small drawback is it
+    will be bigger, because the full code of the function was inserted
+    everywhere it is used: <br>
+    <br>
+    <b><br>
+      <pre>using namespace std;<br>#include &lt;iostream&gt;<br>#include &lt;cmath&gt;<br><br><span style="color: rgb(255, 0, 0);">inline double hypothenuse (double a, double b)</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">{</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">   return sqrt (a * a + b * b);</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">}</span><br><br>int main ()<br>{<br>   double k = 6, m = 9;<br><br>   <span style="color: rgb(153, 153, 153);">// Next two lines produce exactly the same code:</span><br><br>   cout &lt;&lt; <span style="color: rgb(255, 0, 0);">hypothenuse (k, m)</span> &lt;&lt; endl;<br>   cout &lt;&lt; sqrt (k * k + m * m) &lt;&lt; endl;<br><br>   return 0;<br>}<br><br><br></pre>
+    </b>
+    <div align="right">
+      <table style="text-align: left;" border="1" cellpadding="8"
+        cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;
+              background-color: rgb(204, 204, 204);"><small
+                style="font-weight: bold;"><span style="font-family:
+                  sans-serif;">Output</span></small><br>
+            </td>
+          </tr>
+          <tr style="font-family: monospace;">
+            <td style="vertical-align: top;"><b>10.8167<br>
+                10.8167<br>
+              </b></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <b><br>
+      <br>
+    </b>(Inline functions have been added to C in C99 and ANSI C 2000.)<br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <a name="l11"></a><font color="#0f0000" size="+4">11.&nbsp;</font><br>
+    <br>
+    You know the classical control structures of C: <b>for</b>, <b>if</b>,
+    <b>do</b>, <b>while</b>, <b>switch</b>... C++ adds one more
+    control structure named EXCEPTION: <br>
+    <br>
+    <b><br>
+    </b>
+    <pre><b>using namespace std;<br>#include &lt;iostream&gt;<br>#include &lt;cmath&gt;<br><br>int main ()<br>{<br>   int a, b;<br><br>   cout &lt;&lt; "Type a number: ";<br>   cin &gt;&gt; a;<br>   cout &lt;&lt; endl;<br><br>   <span style="color: rgb(255, 0, 0);">try</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">   {</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">      if (a &gt; 100) throw 100;</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">      if (a &lt; 10)  throw 10;</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">      throw a / 3;</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">   }</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">   catch (int result)</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">   {</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">      cout &lt;&lt; "Result is: " &lt;&lt; result &lt;&lt; endl;</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">      b = result + 1;</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">   }</span><br><br>   cout &lt;&lt; "b contains: " &lt;&lt; b &lt;&lt; endl;<br><br>   cout &lt;&lt; endl;<br><br>   <span style="color: rgb(153, 153, 153);">// another example of exception use:</span><br><br>   char zero []     = "zero";<br>   char pair []     = "pair";<br>   char notprime [] = "not prime";<br>   char prime []    = "prime";<br><br>   <span style="color: rgb(255, 0, 0);">try</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">   {</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">      if (a == 0) throw zero;</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">      if ((a / 2) * 2 == a) throw pair;</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">      for (int i = 3; i &lt;= sqrt (a); i++)</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">      {</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">         if ((a / i) * i == a) throw notprime;</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">      }</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">      throw prime;</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">   }</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">   catch (char *conclusion)</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">   {</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">      cout &lt;&lt; "The number you typed is "&lt;&lt; conclusion &lt;&lt; endl;</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">   }</span><br><br>   cout &lt;&lt; endl;<br><br>   return 0;<br>}<br><br><br></b></pre>
+    <div align="right">
+      <table style="text-align: left;" border="1" cellpadding="8"
+        cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;
+              background-color: rgb(204, 204, 204);"><small
+                style="font-weight: bold;"><span style="font-family:
+                  sans-serif;">Output</span></small><br>
+            </td>
+          </tr>
+          <tr style="font-family: monospace;">
+            <td style="vertical-align: top;"><b>Type a number: 5<br>
+                <br>
+                Result is: 10<br>
+                b contains: 11<br>
+                <br>
+                The number you typed is prime<br>
+                <br>
+              </b></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <b><br>
+    </b><b> <br>
+    </b><br>
+    <br>
+    <a name="l12"></a><font color="#0f0000" size="+4">12.&nbsp;</font><br>
+    <br>
+    It is possible to define default parameters for functions: <br>
+    <br>
+    <b><br>
+      <pre>using namespace std;<br>#include &lt;iostream&gt;<br><br>double test (double a, double b<span style="color: rgb(255, 0, 0);"> = 7</span>)<br>{<br>   return a - b;<br>}<br><br>int main ()<br>{<br>   cout &lt;&lt; test (14, 5) &lt;&lt; endl;    <span style="color: rgb(153, 153, 153);">// Displays 14 - 5</span><br>   cout &lt;&lt; test (14) &lt;&lt; endl;       <span style="color: rgb(153, 153, 153);">// Displays 14 - 7</span><br><br>   return 0;<br>}<br><br><br></pre>
+    </b>
+    <div align="right">
+      <table style="text-align: left;" border="1" cellpadding="8"
+        cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;
+              background-color: rgb(204, 204, 204);"><small
+                style="font-weight: bold;"><span style="font-family:
+                  sans-serif;">Output</span></small><br>
+            </td>
+          </tr>
+          <tr style="font-family: monospace;">
+            <td style="vertical-align: top;"><b>9<br>
+                7<br>
+              </b></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <b><br>
+    </b><b> <br>
+    </b><br>
+    <br>
+    <a name="l13"></a><font color="#0f0000" size="+4">13.&nbsp;</font><br>
+    <br>
+    One important advantage of C++ is the FUNCTION OVERLOAD. Different
+    functions can have the same name provided something allows the
+    compiler to distinguish between them: number of parameters, type of
+    parameters... <br>
+    <br>
+    <b><br>
+      <pre>using namespace std;<br>#include &lt;iostream&gt;<br><br>double test (double a, double b)<br>{<br>   return a + b;<br>}<br><br>int test (int a, int b)<br>{<br>   return a - b;<br>}<br><br>int main ()<br>{<br>   double   m = 7,  n = 4;<br>   int      k = 5,  p = 3;<br><br>   cout &lt;&lt; test(m, n) &lt;&lt; " , " &lt;&lt; test(k, p) &lt;&lt; endl;<br><br>   return 0;<br>}<br><br><br></pre>
+    </b>
+    <div align="right">
+      <table style="text-align: left;" border="1" cellpadding="8"
+        cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;
+              background-color: rgb(204, 204, 204);"><small
+                style="font-weight: bold;"><span style="font-family:
+                  sans-serif;">Output</span></small><br>
+            </td>
+          </tr>
+          <tr style="font-family: monospace;">
+            <td style="vertical-align: top;"><b>11 , 2<br>
+              </b></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <b><br>
+    </b><br>
+    <br>
+    <br>
+    <a name="l14"></a><font color="#0f0000" size="+4">14.&nbsp;</font><br>
+    <br>
+    OPERATOR OVERLOADING can be used to redefine the basic symbolic
+    operators for new kinds of parameters: <br>
+    <br>
+    <b><br>
+    </b>
+    <pre><b>using namespace std;<br>#include &lt;iostream&gt;<br><br>struct vector<br>{<br>   double x;<br>   double y;<br>};<br><br><span style="color: rgb(255, 0, 0);">vector operator *</span> (double a, vector b)<br>{<br>   vector r;<br><br>   r.x = a * b.x;<br>   r.y = a * b.y;<br><br>   return r;<br>}<br><br>int main ()<br>{<br>   vector k, m;              <span style="color: rgb(153, 153, 153);">// No need to type "struct vector"</span><br><br>   k.x =  2;                 <span style="color: rgb(153, 153, 153);">// To be able to write</span><br>   k.y = -1;                 <span style="color: rgb(153, 153, 153);">// k = vector (2, -1)</span><br>                             <span style="color: rgb(153, 153, 153);">// see chapter 19.</span><br><br>   m = <span style="color: rgb(255, 0, 0);">3.1415927 * k</span>;        <span style="color: rgb(153, 153, 153);">// Magic!</span><br><br>   cout &lt;&lt; "(" &lt;&lt; m.x &lt;&lt; ", " &lt;&lt; m.y &lt;&lt; ")" &lt;&lt; endl;<br><br>   return 0;<br>}<br><br><br></b></pre>
+    <div align="right">
+      <table style="text-align: left;" border="1" cellpadding="8"
+        cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;
+              background-color: rgb(204, 204, 204);"><small
+                style="font-weight: bold;"><span style="font-family:
+                  sans-serif;">Output</span></small><br>
+            </td>
+          </tr>
+          <tr style="font-family: monospace;">
+            <td style="vertical-align: top;"><b>(6.28319, -3.14159)<br>
+              </b></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <b><br>
+    </b><b> <br>
+    </b>Besides multiplication, 43 other basic C++ operators can be
+    overloaded, including <b>+=</b>, <b>++</b>, the array <b>[]</b>,
+    and so on... <br>
+    <br>
+    The <b>&lt;&lt;</b> operator, normally used for binary shifting of
+    integers, can be overloaded to give output to a stream instead
+    (e.g., <b>cout&nbsp;&lt;&lt;</b>). It is possible to overload the <b>&lt;&lt;</b>
+    operator further for the output of new data types, like vectors: <br>
+    <br>
+    <b><br>
+      <pre>using namespace std;<br>#include &lt;iostream&gt;<br><br>struct vector<br>{<br>   double x;<br>   double y;<br>};<br><br><span style="color: rgb(255, 0, 0);">ostream&amp; operator &lt;&lt; (ostream&amp; o, vector a)</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">{</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">   o &lt;&lt; "(" &lt;&lt; a.x &lt;&lt; ", " &lt;&lt; a.y &lt;&lt; ")";</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">   return o;</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">}</span><br><br>int main ()<br>{<br>   vector a;<br><br>   a.x = 35;<br>   a.y = 23;<br><br>   <span style="color: rgb(255, 0, 0);">cout &lt;&lt; a</span> &lt;&lt; endl;     <span style="color: rgb(153, 153, 153);">// Displays (35, 23)</span><br><br>   return 0;<br>}<br><br><br></pre>
+    </b>
+    <div align="right">
+      <table style="text-align: left;" border="1" cellpadding="8"
+        cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;
+              background-color: rgb(204, 204, 204);"><small
+                style="font-weight: bold;"><span style="font-family:
+                  sans-serif;">Output</span></small><br>
+            </td>
+          </tr>
+          <tr style="font-family: monospace;">
+            <td style="vertical-align: top;"><b>(35, 23)<br>
+              </b></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <b><br>
+    </b><b> <br>
+    </b><br>
+    <br>
+    <a name="l15"></a><font color="#0f0000" size="+4">15.&nbsp;</font><br>
+    <br>
+    Tired of defining the same function five times? One definition for <b>int</b>
+    type parameters, one definition for <b>double</b> type parameters,
+    one definition for <b>float</b> type parameters... Didn't you
+    forget one type? What if a new data type is used? No problem: the
+    C++ compiler can automatically generate every version of the
+    function that is necessary! Just tell it how the function looks like
+    by declaring a <b>template</b> function:<br>
+    <br>
+    <b><br>
+    </b>
+    <pre><b>using namespace std;<br>#include &lt;iostream&gt;<br><br><span style="color: rgb(255, 0, 0);">template &lt;class ttype&gt;</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">ttype minimum (ttype a, ttype b)</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">{</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">   ttype r;</span><br style="color: rgb(255, 0, 0);"><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">   r = a;</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">   if (b &lt; a) r = b;</span><br style="color: rgb(255, 0, 0);"><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">   return r;</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">}</span><br style="color: rgb(255, 0, 0);"><br>int main ()<br>{<br>   <span style="color: rgb(255, 0, 0);">int</span> i1, i2, i3;<br>   i1 = 34;<br>   i2 = 6;<br>   i3 = <span style="color: rgb(255, 0, 0);">min</span><span style="color: rgb(255, 0, 0);">imum</span><span style="color: rgb(255, 0, 0);"> (i1, i2)</span>;<br>   cout &lt;&lt; "Most little: " &lt;&lt; i3 &lt;&lt; endl;<br><br>   <span style="color: rgb(255, 0, 0);">double</span> d1, d2, d3;<br>   d1 = 7.9;<br>   d2 = 32.1;<br>   d3 = <span style="color: rgb(255, 0, 0);">minimum (d1, d2)</span>;<br>   cout &lt;&lt; "Most little: " &lt;&lt; d3 &lt;&lt; endl;<br><br>   cout &lt;&lt; "Most little: " &lt;&lt; <span style="color: rgb(255, 0, 0);">minimum (d3, 3.5)</span> &lt;&lt; endl;<br><br>   return 0;<br>}<br><br><br></b></pre>
+    <div align="right">
+      <table style="text-align: left;" border="1" cellpadding="8"
+        cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;
+              background-color: rgb(204, 204, 204);"><small
+                style="font-weight: bold;"><span style="font-family:
+                  sans-serif;">Output</span></small><br>
+            </td>
+          </tr>
+          <tr style="font-family: monospace;">
+            <td style="vertical-align: top;"><b>Most little: 6<br>
+                Most little: 7.9<br>
+                Most little: 3.5<br>
+              </b></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <b><br>
+    </b><b> <br>
+    </b>The function <b>minimum</b> is used three times in the above
+    program, yet the C++ compiler generates only two versions of it: <b>int&nbsp;minimum
+
+      (int&nbsp;a,&nbsp;int&nbsp;b)</b> and <b>double&nbsp;minimum
+      (double&nbsp;a,&nbsp;double&nbsp;b)</b>. That does the job for the
+    whole program. <br>
+    <br>
+    What would happen if you tried something like calculating <b>minimum
+
+      (i1,&nbsp;d1)</b>? The compiler would have reported that as an
+    error. That's because the template states that both parameters are
+    of the same type. <br>
+    <br>
+    You can use an arbitrary number of different template data types in
+    a template definition. And not all the parameter types must be
+    templates, some of them can be of standard types or user defined (<b>char</b>,
+    <b>int</b>, <b>double</b>...). Here is an example where the <b>minimum</b>
+    function takes parameters of any type (different or the same) and
+    outputs a value that has the type of the first parameter: <br>
+    <br>
+    <b><br>
+      <pre>using namespace std;<br>#include &lt;iostream&gt;<br><br>template &lt;class type1, class type2&gt;<br>type1 minimum (type1 a, type2 b)<br>{<br>   type1 r, b_converted;<br>   r = a;<br>   b_converted = (type1) b;<br>   if (b_converted &lt; a) r = b_converted;<br>   return r;<br>}<br><br>int main ()<br>{<br>   int i;<br>   double d;<br><br>   i = 45;<br>   d = 7.41;<br><br>   cout &lt;&lt; "Most little: " &lt;&lt; minimum (i, d) &lt;&lt; endl;<br>   cout &lt;&lt; "Most little: " &lt;&lt; minimum (d, i) &lt;&lt; endl;<br>   cout &lt;&lt; "Most little: " &lt;&lt; minimum ('A', i) &lt;&lt; endl;<br><br>   return 0;<br>}<br><br><br></pre>
+    </b>
+    <div align="right">
+      <table style="text-align: left;" border="1" cellpadding="8"
+        cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;
+              background-color: rgb(204, 204, 204);"><small
+                style="font-weight: bold;"><span style="font-family:
+                  sans-serif;">Output</span></small><br>
+            </td>
+          </tr>
+          <tr style="font-family: monospace;">
+            <td style="vertical-align: top;"><b>Most little: 7<br>
+                Most little: 7.41<br>
+                Most little: -<br>
+              </b></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <div style="text-align: right;"><b>(The ASCII code of character '-'
+        is 45 while the code of 'A' is 65.)</b><br>
+    </div>
+    <b> <br>
+    </b><br>
+    <br>
+    <br>
+    <br>
+    <a name="l16"></a><font color="#0f0000" size="+4">16.&nbsp;</font><br>
+    <br>
+    The keywords <b>new</b> and <b>delete</b> can be used to allocate
+    and deallocate memory. They are cleaner than the functions <b>malloc</b>
+    and <b>free</b> from standard C. <b><br>
+      <br>
+      new []</b> and <b>delete []</b> are used for arrays.<br>
+    <br>
+    <b><br>
+    </b>
+    <pre><b>using namespace std;<br>#include &lt;iostream&gt;<br>#include &lt;cstring&gt;<br><br>int main ()<br>{<br>   double *d;                         <span style="color: rgb(153, 153, 153);">// d is a variable whose purpose</span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">                                      // is to contain the address of a</span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">                                      // zone where a double is located</span><br style="color: rgb(153, 153, 153);"><br><br>   d = new double;                    <span style="color: rgb(153, 153, 153);">// new allocates a zone of memory</span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">                                      // large enough to contain a double</span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">                                      // and returns its address.</span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">                                      // That address is stored in d.</span><br style="color: rgb(153, 153, 153);"><br>   *d = 45.3;                         <span style="color: rgb(153, 153, 153);">// The number 45.3 is stored</span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">                                      // inside the memory zone</span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">                                      // whose address is given by d.</span><br style="color: rgb(153, 153, 153);"><br>   cout &lt;&lt; "Type a number: ";<br>   cin &gt;&gt; *d;<br><br>   *d = *d + 5;<br><br>   cout &lt;&lt; "Result: " &lt;&lt; *d &lt;&lt; endl;<br><br>   delete d;                          <span style="color: rgb(153, 153, 153);">// delete deallocates the</span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">                                      // zone of memory whose address</span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">                                      // is given by pointer d.</span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">                                      // Now we can no more use that zone.</span><br><br><br>   d = new double[15];                <span style="color: rgb(153, 153, 153);">// allocates a zone for an array</span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">                                      // of 15 doubles. Note each 15</span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">                                      // double will be constructed.</span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">                                      // This is pointless here but it</span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">                                      // is vital when using a data type</span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">                                      // that needs its constructor be</span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">                                      // used for each instance.</span><br style="color: rgb(153, 153, 153);"><br>   d[0] = 4456;<br>   d[1] = d[0] + 567;<br><br>   cout &lt;&lt; "Content of d[1]: " &lt;&lt; d[1] &lt;&lt; endl;<br><br>   delete [] d;                       <span style="color: rgb(153, 153, 153);">// delete [] will deallocate the</span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">                                      // memory zone. Note each 15</span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">                                      // double will be destructed.</span><br style=""><span style="color: rgb(153, 153, 153);">                                      // This is pointless here but it</span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">                                      // is vital when using a data type</span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">                                      // that needs its destructor be</span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">                                      // used for each instance (the ~</span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">                                      // method). Using delete without</span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">                                      // the [] would deallocate the</span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">                                      // memory zone without destructing</span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">                                      // each of the 15 instances. That</span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">                                      // would cause memory leakage.</span><br><br>   int n = 30;<br><br>   d = new double[n];                 <span style="color: rgb(153, 153, 153);">// new can be used to allocate an</span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">                                      // array of random size.</span><br>   for (int i = 0; i &lt; n; i++)<br>   {<br>      d[i] = i;<br>   }<br><br>   delete [] d;<br><br><br>   char *s;<br><br>   s = new char[100];<br><br>   strcpy (s, "Hello!");<br><br>   cout &lt;&lt; s &lt;&lt; endl;<br><br>   delete [] s;<br><br>   return 0;<br>}<br><br><br></b></pre>
+    <div align="right">
+      <table style="text-align: left;" border="1" cellpadding="8"
+        cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;
+              background-color: rgb(204, 204, 204);"><small
+                style="font-weight: bold;"><span style="font-family:
+                  sans-serif;">Output</span></small><br>
+            </td>
+          </tr>
+          <tr style="font-family: monospace;">
+            <td style="vertical-align: top;"><b>Type a number: 6<br>
+                Result: 11<br>
+                Content of d[1]: 5023<br>
+                Hello!<br>
+              </b></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <b><br>
+    </b><b> <br>
+    </b><br>
+    <br>
+    <a name="l17"></a><font color="#0f0000" size="+4">17.</font><br>
+    <br>
+    In standard C, a <span style="font-weight: bold;">struct</span>
+    contains only data. In C++, a struct definition can also include
+    functions. Those functions are owned by the struct and are meant to
+    operate on the data of the struct. Those functions are called
+    METHODS. The example below defines the method <span
+      style="font-weight: bold;">surface()</span> on the struct <span
+      style="font-weight: bold;">vector</span>:<br>
+    <b><br>
+      <br>
+    </b>
+    <pre><b>using namespace std;<br>#include &lt;iostream&gt;<br><br>struct vector<br>{<br>   double x;<br>   double y;<br><br>   <span style="color: rgb(255, 0, 0);">double surface ()</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">   {</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">      double s;</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">      s = x * y;</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">      if (s &lt; 0) s = -s;</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">      return s;</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">   }</span><br>};<br><br>int main ()<br>{<br>   vector a;<br><br>   a.x = 3;<br>   a.y = 4;<br><br>   cout &lt;&lt; "The surface of a: " &lt;&lt; <span style="color: rgb(255, 0, 0);">a.surface()</span> &lt;&lt; endl;<br><br>   return 0;<br>}<br><br><br></b></pre>
+    <div align="right">
+      <table style="text-align: left;" border="1" cellpadding="8"
+        cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;
+              background-color: rgb(204, 204, 204);"><small
+                style="font-weight: bold;"><span style="font-family:
+                  sans-serif;">Output</span></small><br>
+            </td>
+          </tr>
+          <tr style="font-family: monospace;">
+            <td style="vertical-align: top;"><b>The surface of a: 12<br>
+              </b></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <b><br>
+    </b><br>
+    In the example above, <b>a</b> is an INSTANCE of struct "vector".
+    (Note that the keyword "<span style="font-weight: bold;">struct</span>"
+    was not necessary when declaring vector <span style="font-weight:
+      bold;">a</span>.)<br>
+    <br>
+    Just like a function, a method can be an overload of any C++
+    operator, have any number of parameters (yet one parameter is always
+    implicit: the instance it acts upon), return any type of parameter,
+    or return no parameter at all. <br>
+    <br>
+    <br>
+    What is a <b>class</b>? It's a <span style="font-weight: bold;">struct</span>
+    that keeps its data hidden. Only the methods of the <span
+      style="font-weight: bold;">class</span> can access the data. You
+    can't access the data directly, unless authorized by the <span
+      style="font-weight: bold;">public:</span> directive. Here is an
+    example of a <span style="font-weight: bold;">class</span>
+    definition. It behaves exactly the same way as the <span
+      style="font-weight: bold;">struct</span> example above because the
+    class data <span style="font-weight: bold;">x</span> and <span
+      style="font-weight: bold;">y</span> are defined as public:<span
+      style="font-weight: bold;"></span><br>
+    <br>
+    <b><br>
+    </b>
+    <pre><b>using namespace std;<br>#include &lt;iostream&gt;<br><br><span style="color: rgb(255, 0, 0);">class</span> vector<br>{<br><span style="color: rgb(255, 0, 0);">public:</span><br><br>   double x;<br>   double y;<br><br>   double surface ()<br>   {<br>      double s;<br>      s = x * y;<br>      if (s &lt; 0) s = -s;<br>      return s;<br>   }<br>};<br><br>int main ()<br>{<br>   vector a;<br><br>   <span style="color: rgb(255, 0, 0);">a.x = 3;</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">   a.y = 4;</span><br><br>   cout &lt;&lt; "The surface of a: " &lt;&lt; a.surface() &lt;&lt; endl;<br><br>   return 0;<br>}<br><br><br></b></pre>
+    <div align="right">
+      <table style="text-align: left;" border="1" cellpadding="8"
+        cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;
+              background-color: rgb(204, 204, 204);"><small
+                style="font-weight: bold;"><span style="font-family:
+                  sans-serif;">Output</span></small><br>
+            </td>
+          </tr>
+          <tr style="font-family: monospace;">
+            <td style="vertical-align: top;"><b>The surface of a: 12<br>
+              </b></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <b><br>
+      <br>
+    </b>In the example above, the <span style="font-weight: bold;">main()</span>
+    function changes the data of instance <span style="font-weight:
+      bold;">a</span> directly, using <span style="font-weight: bold;">a.x
+      = 3</span> and <span style="font-weight: bold;">a.y = 4</span>.
+    This is made possible by the <span style="font-weight: bold;">public:</span>
+    directive in the class definition. This is considered bad practice.
+    See chapter 30.<br>
+    <br>
+    <br>
+    A method is allowed to change the variables of the instance it is
+    acting upon: <br>
+    <br>
+    <b><br>
+    </b>
+    <pre><b>using namespace std;<br>#include &lt;iostream&gt;<br><br>class vector<br>{<br>public:<br><br>   double x;<br>   double y;<br><br>   vector its_opposite()<br>   {<br>      vector r;<br><br>      r.x = -x;<br>      r.y = -y;<br><br>      return r;<br>   }<br><br>   void be_opposited()<br>   {<br><span style="color: rgb(255, 0, 0);">      x = -x;</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">      y = -y;</span><br style="color: rgb(255, 0, 0);">   }<br><br>   void be_calculated (double a, double b, double c, double d)<br>   {<br><span style="color: rgb(255, 0, 0);">      x = a - c;</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">      y = b - d;</span><br style="color: rgb(255, 0, 0);">   }<br><br>   vector operator * (double a)<br>   {<br>      vector r;<br><br>      r.x = x * a;<br>      r.y = y * a;<br><br>      return r;<br>   }<br>};<br><br>int main ()<br>{<br>   vector a, b;<br><br>   a.x = 3;<br>   a.y = 5;<br><br>   b = a.its_opposite();<br><br>   cout &lt;&lt; "Vector a: " &lt;&lt; a.x &lt;&lt; ", " &lt;&lt; a.y &lt;&lt; endl;<br>   cout &lt;&lt; "Vector b: " &lt;&lt; b.x &lt;&lt; ", " &lt;&lt; b.y &lt;&lt; endl;<br><br>   <span style="color: rgb(255, 0, 0);">b.be_opposited();</span><br>   cout &lt;&lt; "Vector b: " &lt;&lt; b.x &lt;&lt; ", " &lt;&lt; b.y &lt;&lt; endl;<br><br>   <span style="color: rgb(255, 0, 0);">a.be_calculated (7, 8, 3, 2);</span><br>   cout &lt;&lt; "Vector a: " &lt;&lt; a.x &lt;&lt; ", " &lt;&lt; a.y &lt;&lt; endl;<br><br>   a = b * 2;<br>   cout &lt;&lt; "Vector a: " &lt;&lt; a.x &lt;&lt; ", " &lt;&lt; a.y &lt;&lt; endl;<br><br>   a = b.its_opposite() * 2;<br>   cout &lt;&lt; "Vector a: " &lt;&lt; a.x &lt;&lt; ", " &lt;&lt; a.y &lt;&lt; endl;<br><br>   cout &lt;&lt; "x of opposite of a: " &lt;&lt; a.its_opposite().x &lt;&lt; endl;<br><br>   return 0;<br>}<br><br><br></b></pre>
+    <div align="right">
+      <table style="text-align: left;" border="1" cellpadding="8"
+        cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;
+              background-color: rgb(204, 204, 204);"><small
+                style="font-weight: bold;"><span style="font-family:
+                  sans-serif;">Output</span></small><br>
+            </td>
+          </tr>
+          <tr style="font-family: monospace;">
+            <td style="vertical-align: top;"><b>Vector a: 3, 5<br>
+                Vector b: -3, -5<br>
+                Vector b: 3, 5<br>
+                Vector a: 4, 6<br>
+                Vector a: 6, 10<br>
+                Vector a: -6, -10<br>
+                x of opposite of a: 6<br>
+              </b></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <b><br>
+    </b><br>
+    <br>
+    <br>
+    <a name="l18"></a><font color="#0f0000" size="+4">18.&nbsp;</font><br>
+    <br>
+    Very special and essential methods are the CONSTRUCTOR and
+    DESTRUCTOR. They are automatically called whenever an instance of a
+    class is created or destroyed (variable declaration, end of program,
+    <b>new</b>, <b>delete</b>...). <br>
+    <br>
+    The constructor will initialize the variables of the instance, do
+    some calculations, allocate some memory for the instance, output
+    some text... whatever is needed. <br>
+    <br>
+    Here is an example of a class definition with two overloaded
+    constructors: <br>
+    <br>
+    <b><br>
+    </b>
+    <pre><b>using namespace std;<br>#include &lt;iostream&gt;<br><br>class vector<br>{<br>public:<br><br>   double x;<br>   double y;<br><br>   <span style="color: rgb(255, 0, 0);">vector ()</span>                     <span style="color: rgb(153, 153, 153);">// same name as class</span><br>   {<br>      x = 0;<br>      y = 0;<br>   }<br><br>   <span style="color: rgb(255, 0, 0);">vector (double a, double b)</span><br>   {<br>      x = a;<br>      y = b;<br>   }<br><br>};<br><br>int main ()<br>{<br>   vector k;                     <span style="color: rgb(153, 153, 153);">// vector () is called</span><br><br>   cout &lt;&lt; "vector k: " &lt;&lt; k.x &lt;&lt; ", " &lt;&lt; k.y &lt;&lt; endl &lt;&lt; endl;<br><br>   vector m (45, 2);             <span style="color: rgb(153, 153, 153);">// vector (double, double) is called</span><br><br>   cout &lt;&lt; "vector m: " &lt;&lt; m.x &lt;&lt; ", " &lt;&lt; m.y &lt;&lt; endl &lt;&lt; endl;<br><br>   k = vector (23, 2);           <span style="color: rgb(153, 153, 153);">// vector created, copied to k, then erased</span><br><br>   cout &lt;&lt; "vector k: " &lt;&lt; k.x &lt;&lt; ", " &lt;&lt; k.y &lt;&lt; endl &lt;&lt; endl;<br><br>   return 0;<br>}<br><br><br></b></pre>
+    <div align="right">
+      <table style="text-align: left;" border="1" cellpadding="8"
+        cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;
+              background-color: rgb(204, 204, 204);"><small
+                style="font-weight: bold;"><span style="font-family:
+                  sans-serif;">Output</span></small><br>
+            </td>
+          </tr>
+          <tr style="font-family: monospace;">
+            <td style="vertical-align: top;"><b>vector k: 0, 0<br>
+                <br>
+                vector m: 45, 2<br>
+                <br>
+                vector k: 23, 2<br>
+                <br>
+              </b></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <b><br>
+    </b><b> <br>
+    </b>It is good practice to try not to overload the constructors. It
+    is best to declare only one constructor and give it default
+    parameters wherever possible: <br>
+    <br>
+    <b><br>
+    </b>
+    <pre><b>using namespace std;<br>#include &lt;iostream&gt;<br><br>class vector<br>{<br>public:<br><br>   double x;<br>   double y;<br><br>   <span style="color: rgb(255, 0, 0);">vector (double a = 0, double b = 0)</span><br>   {<br>      x = a;<br>      y = b;<br>   }<br>};<br><br>int main ()<br>{<br>   vector k;<br>   cout &lt;&lt; "vector k: " &lt;&lt; k.x &lt;&lt; ", " &lt;&lt; k.y &lt;&lt; endl &lt;&lt; endl;<br><br>   vector m (45, 2);<br>   cout &lt;&lt; "vector m: " &lt;&lt; m.x &lt;&lt; ", " &lt;&lt; m.y &lt;&lt; endl &lt;&lt; endl;<br><br>   vector p (3);<br>   cout &lt;&lt; "vector p: " &lt;&lt; p.x &lt;&lt; ", " &lt;&lt; p.y &lt;&lt; endl &lt;&lt; endl;<br><br>   return 0;<br>}<br><br><br></b></pre>
+    <div align="right">
+      <table style="text-align: left;" border="1" cellpadding="8"
+        cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;
+              background-color: rgb(204, 204, 204);"><small
+                style="font-weight: bold;"><span style="font-family:
+                  sans-serif;">Output</span></small><br>
+            </td>
+          </tr>
+          <tr style="font-family: monospace;">
+            <td style="vertical-align: top;"><b>vector k: 0, 0<br>
+                <br>
+                vector m: 45, 2<br>
+                <br>
+                vector p: 3, 0<br>
+                <br>
+              </b></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <b><br>
+    </b><b> <br>
+    </b>The destructor is often unnecessary. You can use it to do some
+    calculations whenever an instance is destroyed or output some text
+    for debugging... But if variables of the instance point to some
+    allocated memory then the role of the destructor is essential: it
+    must free that memory! Here is an example of such an application: <br>
+    <br>
+    <b><br>
+    </b>
+    <pre><b>using namespace std;<br>#include &lt;iostream&gt;<br>#include &lt;cstring&gt;<br><br>class person<br>{<br>public:<br><br>   char *name;<br>   int age;<br><br>   person (char *n = "no name", int a = 0)<br>   {<br>      name = new char [100];                 <span style="color: rgb(153, 153, 153);">// better than malloc!</span><br>      strcpy (name, n);<br>      age = a;<br>      cout &lt;&lt; "Instance initialized, 100 bytes allocated" &lt;&lt; endl;<br>   }<br><br>   <span style="color: rgb(255, 0, 0);">~person () </span>                              <span style="color: rgb(153, 153, 153);">// The destructor</span><br>   {<br>      delete name;                          <span style="color: rgb(153, 153, 153);">// instead of free!</span><br style="color: rgb(153, 153, 153);"><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">                                            // delete [] name would be more</span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">                                            // academic but it is not vital</span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">                                            // here since the array contains</span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">                                            // no C++ sub-objects that need</span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">                                            // to be deleted.</span><br><br>      cout &lt;&lt; "Instance going to be deleted, 100 bytes freed" &lt;&lt; endl;<br>   }<br>};<br><br>int main ()<br>{<br>    cout &lt;&lt; "Hello!" &lt;&lt; endl &lt;&lt; endl;<br><br>    person a;<br>    cout &lt;&lt; a.name &lt;&lt; ", age " &lt;&lt; a.age &lt;&lt; endl &lt;&lt; endl;<br><br>    person b ("John");<br>    cout &lt;&lt; b.name &lt;&lt; ", age " &lt;&lt; b.age &lt;&lt; endl &lt;&lt; endl;<br><br>    b.age = 21;<br>    cout &lt;&lt; b.name &lt;&lt; ", age " &lt;&lt; b.age &lt;&lt; endl &lt;&lt; endl;<br><br>    person c ("Miki", 45);<br>    cout &lt;&lt; c.name &lt;&lt; ", age " &lt;&lt; c.age &lt;&lt; endl &lt;&lt; endl;<br><br>    cout &lt;&lt; "Bye!" &lt;&lt; endl &lt;&lt; endl;<br><br>   return 0;<br>}<br><br><br></b></pre>
+    <div align="right">
+      <table style="text-align: left;" border="1" cellpadding="8"
+        cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;
+              background-color: rgb(204, 204, 204);"><small
+                style="font-weight: bold;"><span style="font-family:
+                  sans-serif;">Output</span></small><br>
+            </td>
+          </tr>
+          <tr style="font-family: monospace;">
+            <td style="vertical-align: top;"><b>Hello!<br>
+                <br>
+                Instance initialized, 100 bytes allocated<br>
+                no name, age 0<br>
+                <br>
+                Instance initialized, 100 bytes allocated<br>
+                John, age 0<br>
+                <br>
+                John, age 21<br>
+                <br>
+                Instance initialized, 100 bytes allocated<br>
+                Miki, age 45<br>
+                <br>
+                Bye!<br>
+                <br>
+                Instance going to be deleted, 100 bytes freed<br>
+                Instance going to be deleted, 100 bytes freed<br>
+                Instance going to be deleted, 100 bytes freed<br>
+              </b></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <b><br>
+    </b><b> <br>
+    </b>Here is a short example of an array class definition. A method
+    that is an overload of the <b>[]</b> operator and outputs a
+    reference (<b>&amp;</b>) is used in order to generate an error if an
+    attempt is made to access data outside the limits of an array: <br>
+    <br>
+    <b><br>
+    </b>
+    <pre><b>using namespace std;<br>#include &lt;iostream&gt;<br>#include &lt;cstdlib&gt;<br><br>class array<br>{<br>public:<br>   int size;<br>   double *data;<br><br>   array (int s)<br>   {<br>      size = s;<br>      data = new double [s];<br>   }<br><br>   ~array ()<br>   {<br>      delete [] data;<br>   }<br><br>   <span style="color: rgb(255, 0, 0);">double &amp;operator [] (int i)</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">   {</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">      if (i &lt; 0 || i &gt;= size)</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">      {</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">         cerr &lt;&lt; endl &lt;&lt; "Out of bounds" &lt;&lt; endl;</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">         exit (EXIT_FAILURE);</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">      }</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">      else return data [i];</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">   }</span><br>};<br><br>int main ()<br>{<br>   array t (5);<br><br>   <span style="color: rgb(255, 0, 0);">t[0]</span> = 45;                       <span style="color: rgb(153, 153, 153);">// OK</span><br>   <span style="color: rgb(255, 0, 0);">t[4]</span> = <span style="color: rgb(255, 0, 0);">t[0]</span> + 6;                 <span style="color: rgb(153, 153, 153);">// OK</span><br>   cout &lt;&lt; <span style="color: rgb(255, 0, 0);">t[4]</span> &lt;&lt; endl;            <span style="color: rgb(153, 153, 153);">// OK</span><br><br>   <span style="color: rgb(255, 0, 0);">t[10]</span> = 7;                       <span style="color: rgb(153, 153, 153);">// error!</span><br><br>   return 0;<br>}<br><br><br></b></pre>
+    <div align="right">
+      <table style="text-align: left;" border="1" cellpadding="8"
+        cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;
+              background-color: rgb(204, 204, 204);"><small
+                style="font-weight: bold;"><span style="font-family:
+                  sans-serif;">Output</span></small><br>
+            </td>
+          </tr>
+          <tr style="font-family: monospace;">
+            <td style="vertical-align: top;"><b>51<br>
+                <br>
+                Out of bounds<br>
+              </b></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <b><br>
+    </b><br>
+    <br>
+    <br>
+    <a name="l19"></a><font color="#0f0000" size="+4">19.&nbsp;</font><br>
+    <br>
+    If you cast an object like a vector, everything will happen
+    correctly. For example, if vector <b>k</b> contains <b>(4,&nbsp;7)</b>,
+    after the cast <b>m&nbsp;=&nbsp;k</b> the vector <b>m</b> will
+    contain <b>(4,&nbsp;7)</b> too. The values of <span
+      style="font-weight: bold;">k.x</span> and <span
+      style="font-weight: bold;">k.y</span> have simply been copied to <span
+      style="font-weight: bold;">m.x</span> and <span
+      style="font-weight: bold;">m.y</span>. Now suppose you're playing
+    with objects like the <span style="font-weight: bold;">person</span>
+    class above. Those objects contain a pointer to a character string.
+    If you cast the <span style="font-weight: bold;">person</span>
+    object by writing <b>p&nbsp;=&nbsp;r</b> it is necesary that some
+    function does the work to make <b>p</b> be a correct copy of <b>r</b>.
+    Otherwise, <span style="font-weight: bold;">p.name</span> will
+    point to the same physical character string as <span
+      style="font-weight: bold;">r.name</span>. What's more, the former
+    character string pointed to by <span style="font-weight: bold;">p.name</span>
+    is lost and becomes a memory zombie. The result will be
+    catastrophic: a mess of pointers and lost data. The methods that
+    will do the job are the COPY CONSTRUCTOR and an overload of the =
+    operator: <br>
+    <br>
+    <b><br>
+    </b>
+    <pre><b>using namespace std;<br>#include &lt;iostream&gt;<br>#include &lt;cstring&gt;<br><br>class person<br>{<br>public:<br><br>   char *name;<br>   int age;<br><br>   person (char *n = "no name", int a = 0)<br>   {<br>      name = new char[100];<br>      strcpy (name, n);<br>      age = a;<br>   }<br><br>   <span style="color: rgb(255, 0, 0);">person (const person &amp;s)<span style="color: rgb(0, 0, 0);">      <span style="color: rgb(153, 153, 153);">// The COPY CONSTRUCTOR</span></span></span><br>   {<br>     &nbsp;name = new char[100];<br>    &nbsp; strcpy (name, s.name);<br>     &nbsp;age = s.age;<br>  &nbsp;}<br><br>   <span style="color: rgb(255, 0, 0);">person&amp; operator= (const person &amp;s)<span style="color: rgb(0, 0, 0);">  <span style="color: rgb(153, 153, 153);">// overload of =</span></span></span><br>   {<br>      strcpy (name, s.name);<br>      age = s.age;<br>      return *this;<br>   }<br><br>   ~person ()<br>   {<br>      delete [] name;<br>   }<br>};<br><br>void modify_person (person&amp; h)<br>{<br>   h.age += 7;<br>}<br><br>person compute_person (person h)<br>{<br>   h.age += 7;<br>   return h;<br>}<br><br><br>int main ()<br>{<br>   person p;<br>   cout &lt;&lt; p.name &lt;&lt; ", age " &lt;&lt; p.age &lt;&lt; endl &lt;&lt; endl;<br><span style="color: rgb(153, 153, 153);">   // output: no name, age 0</span><br><br>   person k ("John", 56);<br>   cout &lt;&lt; k.name &lt;&lt; ", age " &lt;&lt; k.age &lt;&lt; endl &lt;&lt; endl;<br><span style="color: rgb(153, 153, 153);">   // output: John, age 56</span><br><br>   <span style="color: rgb(255, 0, 0);">p = k;</span><br>   cout &lt;&lt; p.name &lt;&lt; ", age " &lt;&lt; p.age &lt;&lt; endl &lt;&lt; endl;<br><span style="color: rgb(153, 153, 153);">   // output: John, age 56</span><br><br>   <span style="color: rgb(255, 0, 0);">p = person ("Bob", 10);</span><br>   cout &lt;&lt; p.name &lt;&lt; ", age " &lt;&lt; p.age &lt;&lt; endl &lt;&lt; endl;<br><span style="color: rgb(153, 153, 153);">   // output: Bob, age 10</span><br><br><span style="color: rgb(153, 153, 153);">   // Neither the copy constructor nor the overload</span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">   // of = are needed for this operation that modifies </span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">   // p since just the reference towards p is passed to</span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">   // the function modify_person:  </span><br style="color: rgb(153, 153, 153);">   modify_person (p);<br>   cout &lt;&lt; p.name &lt;&lt; ", age " &lt;&lt; p.age &lt;&lt; endl &lt;&lt; endl;<br><span style="color: rgb(153, 153, 153);">   // output: Bob, age 17</span><br><br><span style="color: rgb(153, 153, 153);">   // The copy constructor is called to pass a complete </span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">   // copy of p to the function compute_person. The </span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">   // function uses that copy to make its computations</span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">   // then a copy of that modified copy is made to </span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">   // return the result. Finally the overload of = is </span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">   // called to paste that second copy inside k:</span><br>   k = compute_person (p);<br>   cout &lt;&lt; p.name &lt;&lt; ", age " &lt;&lt; p.age &lt;&lt; endl &lt;&lt; endl;<br><span style="color: rgb(153, 153, 153);">   // output: Bob, age 17</span><br>   cout &lt;&lt; k.name &lt;&lt; ", age " &lt;&lt; k.age &lt;&lt; endl &lt;&lt; endl;<br><span style="color: rgb(153, 153, 153);">   // output: Bob, age 24</span><br><br>   return 0;<br>}<br><br><br></b></pre>
+    <div align="right">
+      <table style="text-align: left;" border="1" cellpadding="8"
+        cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;
+              background-color: rgb(204, 204, 204);"><small
+                style="font-weight: bold;"><span style="font-family:
+                  sans-serif;">Output</span></small><br>
+            </td>
+          </tr>
+          <tr style="font-family: monospace;">
+            <td style="vertical-align: top;"><b>no name, age 0<br>
+                <br>
+                John, age 56<br>
+                <br>
+                John, age 56<br>
+                <br>
+                Bob, age 10<br>
+                <br>
+                Bob, age 17<br>
+                <br>
+                Bob, age 17<br>
+                <br>
+                Bob, age 24<br>
+                <br>
+              </b></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <b><br>
+    </b><b> <br>
+    </b>The copy constructor allows your program to make copies of
+    instances when doing calculations. It is a key method. During
+    calculations, instances are created to hold intermediate results.
+    They are modified, cast and destroyed without you being aware. This
+    is why those methods can be useful even for simple objects (see
+    chapter 14.).<br>
+    <br>
+    In all the examples above, the methods are defined inside the class
+    definition. That automatically makes them inline methods. <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <a name="l20"></a><font color="#0f0000" size="+4">20.&nbsp;</font><br>
+    <br>
+    If a method cannot be inline, or you do not want it to be inline, or
+    if you want the class definition to contain the minimum amount of
+    information (or you simply want the usual separate .h header file
+    and .cpp source code file), then you need only put the prototype of
+    the method inside the class and define the method below the class
+    (or in a separate .cpp source file): <br>
+    <br>
+    <b><br>
+      <pre>using namespace std;<br>#include &lt;iostream&gt;<br><br>class vector<br>{<br>public:<br><br>   double x;<br>   double y;<br><br>   double surface();         <span style="color: rgb(153, 153, 153);">// The ; and no {} show it is a prototype</span><br>};<br><br>double vector::surface()<br>{<br>   double s = 0;<br><br>   for (double i = 0; i &lt; x; i++)<br>   {<br>      s = s + y;<br>   }<br><br>   return s;<br>}<br><br>int main ()<br>{<br>   vector k;<br><br>   k.x = 4;<br>   k.y = 5;<br><br>   cout &lt;&lt; "Surface: " &lt;&lt; k.surface() &lt;&lt; endl;<br><br>   return 0;<br>}<br><br><br></pre>
+    </b>
+    <div align="right">
+      <table style="text-align: left;" border="1" cellpadding="8"
+        cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;
+              background-color: rgb(204, 204, 204);"><small
+                style="font-weight: bold;"><span style="font-family:
+                  sans-serif;">Output</span></small><br>
+            </td>
+          </tr>
+          <tr style="font-family: monospace;">
+            <td style="vertical-align: top;"><b>Surface: 20<br>
+              </b></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <b><br>
+    </b><b> <br>
+    </b>For beginners: <br>
+    <br>
+    If you intend to develop a serious C or C++ program, you need to
+    separate the source code into <span style="font-family:
+      sans-serif;">.h</span> header files and <span style="font-family:
+      sans-serif;">.cpp</span> source files. This is a short example of
+    how it is done. The program above is split into three files&nbsp;:<br>
+    <br>
+    A header file <span style="font-family: sans-serif;">vector.h</span>:<br>
+    <br>
+    <br>
+    <b><b>
+        <pre>class vector<br>{<br>public:<br><br>   double x;<br>   double y;<br><br>   double surface();<br>};<br></pre>
+      </b></b><br>
+    <br>
+    <br>
+    A source file <span style="font-family: sans-serif;">vector.cpp</span>:<br>
+    <br>
+    <br>
+    <b><b>
+        <pre><b><b><b><b><pre>using namespace std;<br><span style="color: rgb(255, 0, 0);">#include "vector.h"</span><br></pre></b></b></b></b><br>double vector::surface()<br>{<br>   double s = 0;<br><br>   for (double i = 0; i &lt; x; i++)<br>   {<br>      s = s + y;<br>   }<br><br>   return s;<br>}<br></pre>
+      </b></b><br>
+    <br>
+    <br>
+    And another source file <span style="font-family: sans-serif;">main.cpp</span>:<br>
+    <br>
+    <br>
+    <b><b> </b></b>
+    <pre><b><b>using namespace std;<br>#include &lt;iostream&gt;<br><span style="color: rgb(255, 0, 0);">#include "vector.h"</span><br style="color: rgb(255, 0, 0);"><br>int main ()<br>{<br>   vector k;<br><br>   k.x = 4;<br>   k.y = 5;<br><br>   cout &lt;&lt; "Surface: " &lt;&lt; k.surface() &lt;&lt; endl;<br><br>   return 0;<br>}</b></b></pre>
+    <br>
+    <br>
+    Assuming <span style="font-family: sans-serif;">vector.cpp</span>
+    is perfect, you compile it once and for all into a <span
+      style="font-family: sans-serif;">.o</span> "object file". The
+    command below produces that object code file, called <span
+      style="font-family: sans-serif;">vector.o</span>:<br>
+    <br>
+    <span style="font-family: monospace;">g++ -c vector.cpp</span><br>
+    <br>
+    Each time you modify the <span style="font-family: sans-serif;">main.cpp</span>
+    source file, you compile it into an executable file, say <span
+      style="font-family: sans-serif;">test20</span>. You tell the
+    compiler explicitly that it has to link the <span
+      style="font-family: sans-serif;">vector.o</span> object file into
+    the final <span style="font-family: sans-serif;">test20</span>
+    executable:<br>
+    <b><br>
+    </b><span style="font-family: monospace;">g++ main.cpp vector.o -o
+      test20</span><b><br>
+      <br>
+    </b>Run the executable this way:<br>
+    <br>
+    <span style="font-family: monospace;">./test20</span><br>
+    <br>
+    This has several advantages: <br>
+    <ul>
+      <li>The source code of <span style="font-family: sans-serif;">vector.cpp</span>
+        need be compiled only once. This saves a lot of time on big
+        projects. (Linking the <span style="font-family: sans-serif;">vector.o</span>
+        file into the <span style="font-family: sans-serif;">test20</span>
+        executable is very fast.)<br>
+      </li>
+    </ul>
+    <ul>
+      <li>You can give somebody the <span style="font-family:
+          sans-serif;">.h</span> file and the <span style="font-family:
+          sans-serif;">.o</span> file(s). That way they can use your
+        software but not change it because they don't have the <span
+          style="font-family: sans-serif;">.cpp</span> file(s) (don't
+        rely too much on this, wait until you master these questions).</li>
+    </ul>
+    Note you can compile <span style="font-family: sans-serif;">main.cpp</span>
+    too into an object file and then link it with <span
+      style="font-family: sans-serif;">vector.o</span>:<br>
+    <br>
+    <span style="font-family: monospace;">g++ -c main.cpp</span><br>
+    <br>
+    <span style="font-family: monospace;">g++ main.o vector.o test20</span><br>
+    <br>
+    This wanders away from the "differences between C and C++" topic but
+    if you want to look like a real programmer, you need to condense the
+    above commands into a <span style="font-family: serif;">Makefile</span>
+    and compile using the <span style="font-family: monospace;">make</span>
+    command. The file content beneath is an oversimplified version of
+    such a Makefile. Copy it to a file named <span style="font-family:
+      sans-serif;">Makefile</span>. Please note, and this is very
+    important, that the space before the <span style="font-family:
+      monospace;">g++</span> commands is mandatory and that it is a Tab
+    character. Do not type the spacebar here. Instead use the tabulation
+    key (full left of your keyboard, above the caps lock).<br>
+    <br>
+    <br>
+    <b>
+      <pre>test20: main.o vector.o<br>	g++ main.o vector.o -o test20<br><br>main.o: main.cpp vector.h<br>	g++ -c main.cpp<br><br>vector.o: vector.cpp vector.h<br>	g++ -c vector.cpp<br></pre>
+    </b> <br>
+    <br>
+    In order to use that Makefile to compile, type:<br>
+    <br>
+    <span style="font-family: monospace;">make test20</span><br>
+    <br>
+    The make command will parse through the file <span
+      style="font-family: sans-serif;">Makefile</span> and figure out
+    what it has to do. To start with, it's told that <span
+      style="font-family: sans-serif;">test20</span> depends on <span
+      style="font-family: sans-serif;">main.o</span> and <span
+      style="font-family: sans-serif;">vector.o</span>. So it will
+    automatically launch "<span style="font-family: monospace;">make
+      main.o</span>" and "<span style="font-family: monospace;">make
+      vector.o</span>". Then it will check if <span style="font-family:
+      sans-serif;">test20</span> already exists and checks the date
+    stamps of <span style="font-family: sans-serif;">test20</span>, <span
+      style="font-family: sans-serif;">main.o</span> and <span
+      style="font-family: sans-serif;">vector.o</span>. If <span
+      style="font-family: sans-serif;">test20</span> already exists and
+    <span style="font-family: sans-serif;">main.o</span> and <span
+      style="font-family: sans-serif;">vector.o</span> have a date stamp
+    earlier than <span style="font-family: sans-serif;">test20</span>,
+    the <span style="font-family: monospace;">make</span> command
+    determines that the current version of <span style="font-family:
+      sans-serif;">test20</span> is up to date, so it has nothing to do.
+    It will just report it did nothing. Otherwise, if <span
+      style="font-family: sans-serif;">test20</span> does not exist, or
+    <span style="font-family: sans-serif;">main.o</span> or <span
+      style="font-family: sans-serif;">vector.o</span> are more recent
+    than <span style="font-family: sans-serif;">test20</span>, the
+    command that creates an up-to-date version of <span
+      style="font-family: sans-serif;">test20</span> is executed: <span
+      style="font-family: monospace;">g++ main.o vector.o -o test20</span>.<br>
+    <br>
+    This next version of the <span style="font-family: sans-serif;">Makefile</span>
+    is closer to a standard Makefile:<br>
+    <br>
+    <br>
+    <b>
+      <pre>all: test20<br><br>test20: main.o vector.o<br>	g++ main.o vector.o -o test20<br><br>main.o: main.cpp vector.h<br>	g++ -c main.cpp<br><br>vector.o: vector.cpp vector.h<br>	g++ -c vector.cpp<br><br>clean:<br>	rm -f *.o test20 *~ #*<br></pre>
+    </b> <br>
+    <br>
+    You trigger the compilation by just typing the <span
+      style="font-family: monospace;">make</span> command. The first
+    line in the Makefile implies that if you just type <span
+      style="font-family: monospace;">make</span> you intended "<span
+      style="font-family: monospace;">make test20</span>":<br>
+    <br>
+    <span style="font-family: monospace;">make</span><br>
+    <br>
+    This command erases all the files produced during compilation and
+    all text editor backup files:<br>
+    <br>
+    <span style="font-family: monospace;">make clean</span><br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <a name="l21"></a><font color="#0f0000" size="+4">21.&nbsp;</font><br>
+    <br>
+    When a method is applied to an instance, that method may use the
+    instance's variables, modify them... But sometimes it is necessary
+    to know the address of the instance. No problem, the keyword <b>this</b>
+    is intended for that purpose: <br>
+    <br>
+    <b><br>
+    </b>
+    <pre><b>using namespace std;<br>#include &lt;iostream&gt;<br>#include &lt;cmath&gt;<br><br>class vector<br>{<br>public:<br><br>   double x;<br>   double y;<br><br>   vector (double a = 0, double b = 0)<br>   {<br>      x = a;<br>      y = b;<br>   }<br><br>   double module()<br>   {<br>      return sqrt (x * x + y * y);<br>   }<br><br>   void set_length (double a = 1)<br>   {<br>      double length;<br><br>      length = <span style="color: rgb(255, 0, 0);">this-&gt;</span>module();<br><br>      x = x / length * a;<br>      y = y / length * a;<br>   }<br>};<br><br>int main ()<br>{<br>   vector c (3, 5);<br><br>   cout &lt;&lt; "The module of vector c: " &lt;&lt; c.module() &lt;&lt; endl;<br><br>   c.set_length(2);            <span style="color: rgb(153, 153, 153);">// Transforms c in a vector of size 2.</span><br><br>   cout &lt;&lt; "The module of vector c: " &lt;&lt; c.module() &lt;&lt; endl;<br><br>   c.set_length();             <span style="color: rgb(153, 153, 153);">// Transforms b in an unitary vector.</span><br><br>   cout &lt;&lt; "The module of vector c: " &lt;&lt; c.module() &lt;&lt; endl;<br><br>   return 0;<br>}<br><br><br></b></pre>
+    <div align="right">
+      <table style="text-align: left;" border="1" cellpadding="8"
+        cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;
+              background-color: rgb(204, 204, 204);"><small
+                style="font-weight: bold;"><span style="font-family:
+                  sans-serif;">Output</span></small><br>
+            </td>
+          </tr>
+          <tr style="font-family: monospace;">
+            <td style="vertical-align: top;"><b>The module of vector c:
+                5.83095<br>
+                The module of vector c: 2<br>
+                The module of vector c: 1<br>
+              </b></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <b><br>
+    </b><b> <br>
+    </b><br>
+    <br>
+    <a name="l22"></a><font color="#0f0000" size="+4">22.&nbsp;</font><br>
+    <br>
+    Of course, it is possible to declare arrays of objects: <br>
+    <br>
+    <b><br>
+      <pre>using namespace std;<br>#include &lt;iostream&gt;<br>#include &lt;cmath&gt;<br><br>class vector<br>{<br>public:<br><br>   double x;<br>   double y;<br><br>   vector (double a = 0, double b = 0)<br>   {<br>      x = a;<br>      y = b;<br>   }<br><br>   double module ()<br>   {<br>      return sqrt (x * x + y * y);<br>   }<br>};<br><br>int main ()<br>{<br>   vector s [1000];<br><br>   vector t[3] = {vector(4, 5), vector(5, 5), vector(2, 4)};<br><br>   s[23] = t[2];<br><br>   cout &lt;&lt; t[0].module() &lt;&lt; endl;<br><br>   return 0;<br>}<br><br><br></pre>
+    </b>
+    <div align="right">
+      <table style="text-align: left;" border="1" cellpadding="8"
+        cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;
+              background-color: rgb(204, 204, 204);"><small
+                style="font-weight: bold;"><span style="font-family:
+                  sans-serif;">Output</span></small><br>
+            </td>
+          </tr>
+          <tr style="font-family: monospace;">
+            <td style="vertical-align: top;"><b>6.40312<br>
+              </b></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <b><br>
+    </b><br>
+    <br>
+    <br>
+    <a name="l23"></a><font color="#0f0000" size="+4">23.&nbsp;</font><br>
+    <br>
+    Here is an example of a full class declaration: <br>
+    <br>
+    <b><br>
+    </b>
+    <pre><b>using namespace std;<br>#include &lt;iostream&gt;<br>#include &lt;cmath&gt;<br><br>class vector<br>{<br>public:<br><br>   double x;<br>   double y;<br><br>   vector (double = 0, double = 0);<br><br>   vector operator + (vector);<br>   vector operator - (vector);<br>   vector operator - ();<br>   vector operator * (double a);<br>   double module();<br>   void set_length (double = 1);<br>};<br><br>vector::vector (double a, double b)<br>{<br>   x = a;<br>   y = b;<br>}<br><br>vector vector::operator + (vector a)<br>{<br>   return vector (x + a.x, y + a.y);<br>}<br><br>vector vector::operator - (vector a)<br>{<br>   return vector (x - a.x, y - a.y);<br>}<br><br>vector vector::operator - ()<br>{<br>   return vector (-x, -y);<br>}<br><br>vector vector::operator * (double a)<br>{<br>   return vector (x * a, y * a);<br>}<br><br>double vector::module()<br>{<br>   return sqrt (x * x + y * y);<br>}<br><br>void vector::set_length (double a)<br>{<br>   double length = this-&gt;module();<br><br>   x = x / length * a;<br>   y = y / length * a;<br>}<br><br>ostream&amp; operator &lt;&lt; (ostream&amp; o, vector a)<br>{<br>   o &lt;&lt; "(" &lt;&lt; a.x &lt;&lt; ", " &lt;&lt; a.y &lt;&lt; ")";<br>   return o;<br>}<br><br>int main ()<br>{<br>   vector a;<br>   vector b;<br>   vector c (3, 5);<br><br>   a = c * 3;<br>   a = b + c;<br>   c = b - c + a + (b - a) * 7;<br>   c = -c;<br><br>   cout &lt;&lt; "The module of vector c: " &lt;&lt; c.module() &lt;&lt; endl;<br><br>   cout &lt;&lt; "The content of vector a:  " &lt;&lt;  a &lt;&lt; endl;<br>   cout &lt;&lt; "The opposite of vector a: " &lt;&lt; -a &lt;&lt; endl;<br><br>   c.set_length(2);            <span style="color: rgb(153, 153, 153);">// Transforms c in a vector of size 2.</span><br><br>   a = vector (56, -3);<br>   b = vector (7, c.y);<br><br>   b.set_length();             <span style="color: rgb(153, 153, 153);">// Transforms b in an unitary vector.</span><br><br>   cout &lt;&lt; "The content of vector b: " &lt;&lt; b &lt;&lt; endl;<br><br>   double k;<br>   k = vector(1, 1).module();  <span style="color: rgb(153, 153, 153);">// k will contain 1.4142.</span><br>   cout &lt;&lt; "k contains: " &lt;&lt; k &lt;&lt; endl;<br><br>   return 0;<br>}<br><br><br></b></pre>
+    <div align="right">
+      <table style="text-align: left;" border="1" cellpadding="8"
+        cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;
+              background-color: rgb(204, 204, 204);"><small
+                style="font-weight: bold;"><span style="font-family:
+                  sans-serif;">Output</span></small><br>
+            </td>
+          </tr>
+          <tr style="font-family: monospace;">
+            <td style="vertical-align: top;"><b>The module of vector c:
+                40.8167<br>
+                The content of vector a: (3, 5)<br>
+                The opposite of vector a: (-3, -5)<br>
+                The content of vector b: (0.971275, 0.23796)<br>
+                k contains: 1.41421<br>
+              </b></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <b><br>
+    </b><b> <br>
+    </b>It is also possible to define a function to produces the sum of
+    two vectors without mentioning it inside the vector class
+    definition. Then it will not be a method of the class vector, but
+    rather just a function that uses vectors: <br>
+    <br>
+    <b><br>
+      <pre>vector operator + (vector a, vector b)<br>{<br>   return vector (a.x + b.x, a.y + b.y);<br>}<br><br></pre>
+      <br>
+      <br>
+    </b>In the example of a full class definition, above, the
+    multiplication of a vector by a double is defined. Suppose we want
+    the multiplication of a double by a vector to be defined too. Then
+    we must write an isolated function outside the class: <br>
+    <br>
+    <b><br>
+      <pre>vector operator * (double a, vector b)<br>{<br>   return vector (a * b.x, a * b.y);<br>}<br><br></pre>
+      <br>
+      <br>
+    </b>Of course the keywords <b>new</b> and <b>delete</b> work for
+    class instances too. What's more, <b>new</b> automatically calls
+    the constructor in order to initialize the objects, and <b>delete</b>
+    automatically calls the destructor before deallocating the memory
+    the instance variables take: <br>
+    <br>
+    <b><br>
+    </b>
+    <pre><b>using namespace std;<br>#include &lt;iostream&gt;<br>#include &lt;cmath&gt;<br><br>class vector<br>{<br>public:<br><br>   double x;<br>   double y;<br><br>   vector (double = 0, double = 0);<br><br>   vector operator + (vector);<br>   vector operator - (vector);<br>   vector operator - ();<br>   vector operator * (double);<br>   double module();<br>   void set_length (double = 1);<br>};<br><br>vector::vector (double a, double b)<br>{<br>   x = a;<br>   y = b;<br>}<br><br>vector vector::operator + (vector a)<br>{<br>   return vector (x + a.x, y + a.y);<br>}<br><br>vector vector::operator - (vector a)<br>{<br>   return vector (x - a.x, y - a.y);<br>}<br><br>vector vector::operator - ()<br>{<br>    return vector (-x, -y);<br><br>}<br><br>vector vector::operator * (double a)<br>{<br>    return vector (a * x, a * y);<br>}<br><br>double vector::module()<br>{<br>   return sqrt (x * x + y * y);<br>}<br><br>void vector::set_length (double a)<br>{<br>   vector &amp;the_vector = *this;<br><br>   double length = the_vector.module();<br><br>   x = x / length * a;<br>   y = y / length * a;<br>}<br><br>ostream&amp; operator &lt;&lt; (ostream&amp; o, vector a)<br>{<br>   o &lt;&lt; "(" &lt;&lt; a.x &lt;&lt; ", " &lt;&lt; a.y &lt;&lt; ")";<br>   return o;<br>}<br><br>int main ()<br>{<br>   vector c (3, 5);<br><br>   vector *r;                  <span style="color: rgb(153, 153, 153);">// r is a pointer to a vector.</span><br><br>   r = new vector;             <span style="color: rgb(153, 153, 153);">// new allocates the memory necessary</span><br>   cout &lt;&lt; *r &lt;&lt; endl;         <span style="color: rgb(153, 153, 153);">// to hold a vectors' variable,</span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">                               // calls the constructor who will</span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">                               // initialize it to 0, 0. Then finally</span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">                               // new returns the address of the vector.</span><br><br>   r-&gt;x = 94;<br>   r-&gt;y = 345;<br>   cout &lt;&lt; *r &lt;&lt; endl;<br><br>   *r = vector (94, 343);<br>   cout &lt;&lt; *r &lt;&lt; endl;<br><br>   *r = *r - c;<br>   r-&gt;set_length(3);<br>   cout &lt;&lt; *r &lt;&lt; endl;<br><br>   *r = (-c * 3  +  -*r * 4) * 5;<br>   cout &lt;&lt; *r &lt;&lt; endl;<br><br>   delete r;                   <span style="color: rgb(153, 153, 153);">// Calls the vector destructor then</span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">                               // frees the memory.</span><br><br>   r = &amp;c;                     <span style="color: rgb(153, 153, 153);">// r points towards vector c</span><br>   cout &lt;&lt; *r &lt;&lt; endl;<br><br>   r = new vector (78, 345);   <span style="color: rgb(153, 153, 153);">// Creates a new vector.</span><br>   cout &lt;&lt; *r &lt;&lt; endl;         <span style="color: rgb(153, 153, 153);">// The constructor will initialise</span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">                               // the vector's x and y at 78 and 345</span><br><br>   cout &lt;&lt; "x component of r: " &lt;&lt; r-&gt;x &lt;&lt; endl;<br>   cout &lt;&lt; "x component of r: " &lt;&lt; (*r).x &lt;&lt; endl;<br><br>   delete r;<br><br>   r = new vector[4];          <span style="color: rgb(153, 153, 153);">// creates an array of 4 vectors</span><br><br>   r[3] = vector (4, 5);<br>   cout &lt;&lt; r[3].module() &lt;&lt; endl;<br><br>   delete [] r;                <span style="color: rgb(153, 153, 153);">// deletes the array</span><br><br>   int n = 5;<br>   r = new vector[n];          <span style="color: rgb(153, 153, 153);">// Cute!</span><br><br>   r[1] = vector (432, 3);<br>   cout &lt;&lt; r[1] &lt;&lt; endl;<br><br>   delete [] r;<br><br>   return 0;<br>}<br><br><br></b></pre>
+    <div align="right">
+      <table style="text-align: left;" border="1" cellpadding="8"
+        cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;
+              background-color: rgb(204, 204, 204);"><small
+                style="font-weight: bold;"><span style="font-family:
+                  sans-serif;">Output</span></small><br>
+            </td>
+          </tr>
+          <tr style="font-family: monospace;">
+            <td style="vertical-align: top;"><b>(0, 0)<br>
+                (94, 345)<br>
+                (94, 343)<br>
+                (0.77992, 2.89685)<br>
+                (-60.5984, -132.937)<br>
+                (3, 5)<br>
+                (78, 345)<br>
+                x component of r: 78<br>
+                x component of r: 78<br>
+                6.40312<br>
+                (432, 3)<br>
+              </b></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <b><br>
+    </b><b> <br>
+    </b><br>
+    <br>
+    <a name="l24"></a><font color="#0f0000" size="+4">24.&nbsp;</font><br>
+    <br>
+    One or more variables in a class can be declared <b>static</b>. In
+    which case, only one instance of those variables exist, shared by
+    all instances of the class. It must be initialised outside the class
+    declaration&nbsp;: <br>
+    <br>
+    <b><br>
+      <pre>using namespace std;<br>#include &lt;iostream&gt;<br><br>class vector<br>{<br>public:<br><br>   double x;<br>   double y;<br>   static int count;<br><br>   vector (double a = 0, double b = 0)<br>   {<br>      x = a;<br>      y = b;<br>      count++;<br>   }<br><br>   ~vector()<br>   {<br>      count--;<br>   }<br>};<br><br>int vector::count = 0;<br><br>int main ()<br>{<br>   cout &lt;&lt; "Number of vectors:" &lt;&lt; endl;<br><br>   vector a;<br>   cout &lt;&lt; vector::count &lt;&lt; endl;<br><br>   vector b;<br>   cout &lt;&lt; vector::count  &lt;&lt; endl;<br><br>   vector *r, *u;<br><br>   r = new vector;<br>   cout &lt;&lt; vector::count &lt;&lt; endl;<br><br>   u = new vector;<br>   cout &lt;&lt; a.count &lt;&lt; endl;<br><br>   delete r;<br>   cout &lt;&lt; vector::count &lt;&lt; endl;<br><br>   delete u;<br>   cout &lt;&lt; b.count &lt;&lt; endl;<br><br>   return 0;<br>}<br><br><br></pre>
+    </b>
+    <div align="right">
+      <table style="text-align: left;" border="1" cellpadding="8"
+        cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;
+              background-color: rgb(204, 204, 204);"><small
+                style="font-weight: bold;"><span style="font-family:
+                  sans-serif;">Output</span></small><br>
+            </td>
+          </tr>
+          <tr style="font-family: monospace;">
+            <td style="vertical-align: top;"><b>1<br>
+                2<br>
+                3<br>
+                4<br>
+                3<br>
+                2<br>
+              </b></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <b><br>
+    </b><b> <br>
+    </b><br>
+    <br>
+    <a name="l25"></a><font color="#0f0000" size="+4">25.&nbsp;</font><br>
+    <br>
+    A class variable can also be <b>const</b>ant. That's just like
+    static, except it is given a value inside the class declaration and
+    that value cannot be modified: <br>
+    <br>
+    <b><br>
+    </b>
+    <pre><b>using namespace std;<br>#include &lt;iostream&gt;<br><br>class vector<br>{<br>public:<br><br>   double x;<br>   double y;<br>   const static double pi = 3.1415927;<br><br>   vector (double a = 0, double b = 0)<br>   {<br>      x = a;<br>      y = b;<br>   }<br><br>   double cilinder_volume ()<br>   {<br>      return x * x / 4 * pi * y;<br>   }<br>};<br><br>int main()<br>{<br>   cout &lt;&lt; "The value of pi: " &lt;&lt; vector::pi &lt;&lt; endl &lt;&lt; endl;<br><br>   vector k (3, 4);<br><br>   cout &lt;&lt; "Result: " &lt;&lt; k.cilinder_volume() &lt;&lt; endl;<br><br>   return 0;<br>}<br><br><br></b></pre>
+    <div align="right">
+      <table style="text-align: left;" border="1" cellpadding="8"
+        cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;
+              background-color: rgb(204, 204, 204);"><small
+                style="font-weight: bold;"><span style="font-family:
+                  sans-serif;">Output</span></small><br>
+            </td>
+          </tr>
+          <tr style="font-family: monospace;">
+            <td style="vertical-align: top;"><b>The value of pi: 3.14159<br>
+                <br>
+                Result: 28.2743<br>
+              </b></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <b><br>
+    </b><b> <br>
+    </b><br>
+    <br>
+    <a name="l26"></a><font color="#0f0000" size="+4">26.&nbsp;</font><br>
+    <br>
+    A class can be DERIVED from another class. The new class INHERITS
+    the variables and methods of the BASE CLASS. Additional variables
+    and/or methods can be added: <br>
+    <br>
+    <b><br>
+    </b>
+    <pre><b>using namespace std;<br>#include &lt;iostream&gt;<br>#include &lt;cmath&gt;<br><br>class vector<br>{<br>public:<br><br>   double x;<br>   double y;<br><br>   vector (double a = 0, double b = 0)<br>   {<br>      x = a;<br>      y = b;<br>   }<br><br>   double module()<br>   {<br>      return sqrt (x*x + y*y);<br>   }<br><br>   double surface()<br>   {<br>       return x * y;<br>   }<br>};<br><br>class trivector: public vector    <span style="color: rgb(153, 153, 153);">// trivector is derived from vector</span><br>{<br>public:<br>   double z;                      <span style="color: rgb(153, 153, 153);">// added to x and y from vector</span><br><br>   trivector (double m=0, double n=0, double p=0): vector (m, n)<br>   {<br>      z = p;                      <span style="color: rgb(153, 153, 153);">// Vector constructor will</span><br>   }                              <span style="color: rgb(153, 153, 153);">// be called before trivector</span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">                                  // constructor, with parameters</span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">                                  // m and n.</span><br><br>   trivector (vector a)           <span style="color: rgb(153, 153, 153);">// What to do if a vector is</span><br>   {                              <span style="color: rgb(153, 153, 153);">// cast to a trivector</span><br>      x = a.x;<br>      y = a.y;<br>      z = 0;<br>   }<br><br>   double module ()               <span style="color: rgb(153, 153, 153);">// define module() for trivector</span><br>   {<br>      return sqrt (x*x + y*y + z*z);<br>   }<br><br>   double volume ()<br>   {<br>       return this-&gt;surface() * z;         <span style="color: rgb(153, 153, 153);">// or x * y * z</span><br>   }<br>};<br><br>int main ()<br>{<br>   vector a (4, 5);<br>   trivector b (1, 2, 3);<br><br>   cout &lt;&lt; "a (4, 5)    b (1, 2, 3)    *r = b" &lt;&lt; endl &lt;&lt; endl;<br><br>   cout &lt;&lt; "Surface of a: " &lt;&lt; a.surface() &lt;&lt; endl;<br>   cout &lt;&lt; "Volume of b: " &lt;&lt; b.volume() &lt;&lt; endl;<br>   cout &lt;&lt; "Surface of base of b: " &lt;&lt; b.surface() &lt;&lt; endl;<br><br>   cout &lt;&lt; "Module of a: " &lt;&lt; a.module() &lt;&lt; endl;<br>   cout &lt;&lt; "Module of b: " &lt;&lt; b.module() &lt;&lt; endl;<br>   cout &lt;&lt; "Module of base of b: " &lt;&lt; b.vector::module() &lt;&lt; endl;<br><br>   trivector k;<br>   k = a;               <span style="color: rgb(153, 153, 153);">// thanks to trivector(vector) definition</span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">                        // copy of x and y,       k.z = 0</span><br>   vector j;<br>   j = b;               <span style="color: rgb(153, 153, 153);">// copy of x and y.       b.z leaved out</span><br><br>   vector *r;<br>   r = &amp;b;<br><br>   cout &lt;&lt; "Surface of r: " &lt;&lt; r-&gt;surface() &lt;&lt; endl;<br>   cout &lt;&lt; "Module of r: " &lt;&lt; r-&gt;module() &lt;&lt; endl;<br><br>   return 0;<br>}<br><br><br></b></pre>
+    <div align="right">
+      <table style="text-align: left;" border="1" cellpadding="8"
+        cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;
+              background-color: rgb(204, 204, 204);"><small
+                style="font-weight: bold;"><span style="font-family:
+                  sans-serif;">Output</span></small><br>
+            </td>
+          </tr>
+          <tr style="font-family: monospace;">
+            <td style="vertical-align: top;"><b>a (4,
+                5)&nbsp;&nbsp;&nbsp; b (1, 2, 3)&nbsp;&nbsp;&nbsp; *r =
+                b<br>
+                <br>
+                Surface of a: 20<br>
+                Volume of b: 6<br>
+                Surface of base of b: 2<br>
+                Module of a: 6.40312<br>
+                Module of b: 3.74166<br>
+                Module of base of b: 2.23607<br>
+                Surface of r: 2<br>
+                Module of r: 2.23607<br>
+              </b></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <b><br>
+    </b><b> <br>
+    </b><br>
+    <br>
+    <a name="l27"></a><font color="#0f0000" size="+4">27.&nbsp;</font><br>
+    <br>
+    In the program above, <b>r-&gt;module()</b> calculates the vector
+    module, using <b>x</b> and <b>y</b>, because <b>r</b> has been
+    declared a vector pointer. The fact that <b>r</b> actually points
+    to a trivector is not taken into account. If you want the program to
+    check the type of the pointed object and choose the appropriate
+    method, then you must declare that method as <b>virtual</b> inside
+    the base class. <br>
+    <br>
+    (If at least one of the methods of the base class is virtual then a
+    "header" of 4 bytes is added to every instance of the classes. This
+    allows the program to determine what a vector actually points to.)
+    (4 bytes is probably implementation specific. On a 64 bit machine
+    maybe it is 8 bytes...) <br>
+    <br>
+    <b><br>
+    </b>
+    <pre><b>using namespace std;<br>#include &lt;iostream&gt;<br>#include &lt;cmath&gt;<br><br>class vector<br>{<br>public:<br><br>   double x;<br>   double y;<br><br>   vector (double a = 0, double b = 0)<br>   {<br>      x = a;<br>      y = b;<br>   }<br><br>   virtual double module()<br>   {<br>      return sqrt (x*x + y*y);<br>   }<br>};<br><br>class trivector: public vector<br>{<br>public:<br>   double z;<br><br>   trivector (double m = 0, double n = 0, double p = 0)<br>   {<br>      x = m;                  <span style="color: rgb(153, 153, 153);">// Just for the game,</span><br>      y = n;                  <span style="color: rgb(153, 153, 153);">// here I do not call the vector</span><br>      z = p;                  <span style="color: rgb(153, 153, 153);">// constructor and I make the</span><br>   }                          <span style="color: rgb(153, 153, 153);">// trivector constructor do the</span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">                              // whole job. Same result.</span><br><br>   double module ()<br>   {<br>      return sqrt (x*x + y*y + z*z);<br>   }<br>};<br><br>void test (vector &amp;k)<br>{<br>    cout &lt;&lt; "Test result:          " &lt;&lt; k.module() &lt;&lt; endl;<br>}<br><br>int main ()<br>{<br>   vector a (4, 5);<br>   trivector b (1, 2, 3);<br><br>   cout &lt;&lt; "a (4, 5)    b (1, 2, 3)" &lt;&lt; endl &lt;&lt; endl;<br><br>   vector *r;<br><br>   r = &amp;a;<br>   cout &lt;&lt; "module of vector a: " &lt;&lt; r-&gt;module() &lt;&lt; endl;<br><br>   r = &amp;b;<br>   cout &lt;&lt; "module of trivector b: " &lt;&lt; r-&gt;module() &lt;&lt; endl;<br><br>   test (a);<br><br>   test (b);<br><br>   vector &amp;s = b;<br><br>   cout &lt;&lt; "module of trivector b: " &lt;&lt; s.module() &lt;&lt; endl;<br><br>   return 0;<br>}<br><br><br></b></pre>
+    <div align="right">
+      <table style="text-align: left;" border="1" cellpadding="8"
+        cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;
+              background-color: rgb(204, 204, 204);"><small
+                style="font-weight: bold;"><span style="font-family:
+                  sans-serif;">Output</span></small><br>
+            </td>
+          </tr>
+          <tr style="font-family: monospace;">
+            <td style="vertical-align: top;"><b>a (4,
+                5)&nbsp;&nbsp;&nbsp; b (1, 2, 3)<br>
+                <br>
+                module of vector a: 6.40312<br>
+                module of trivector b: 3.74166<br>
+                Test
+                result:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                6.40312<br>
+                Test
+                result:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                3.74166<br>
+                module of trivector b: 3.74166<br>
+              </b></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <b><br>
+    </b><b> <br>
+    </b><br>
+    <br>
+    <a name="l28"></a><font color="#0f0000" size="+4">28.&nbsp;</font><br>
+    <br>
+    Maybe you wonder if a class can be derived from more than one base
+    class. The answer is yes: <br>
+    <br>
+    <b><br>
+    </b>
+    <pre><b>using namespace std;<br>#include &lt;iostream&gt;<br>#include &lt;cmath&gt;<br><br>class vector<br>{<br>public:<br><br>   double x;<br>   double y;<br><br>   vector (double a = 0, double b = 0)<br>   {<br>      x = a;<br>      y = b;<br>   }<br><br>   double surface()<br>   {<br>      return fabs (x * y);<br>   }<br>};<br><br>class number<br>{<br>public:<br><br>   double z;<br><br>   number (double a)<br>   {<br>      z = a;<br>   }<br><br>   int is_negative ()<br>   {<br>      if (z &lt; 0) return 1;<br>      else       return 0;<br>   }<br>};<br><br><span style="color: rgb(255, 0, 0);">class trivector: public vector, public number</span><br>{<br>public:<br><br>   trivector(double a=0, double b=0, double c=0)<span style="color: rgb(255, 0, 0);">: vector(a,b), number(c)</span><br>   {<br>   }           <span style="color: rgb(153, 153, 153);">// The trivector constructor calls the vector</span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">               // constructor, then the number constructor,</span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">               // and in this example does nothing more.</span><br style="color: rgb(153, 153, 153);"><br>   double volume()<br>   {<br>      return fabs (x * y * z);<br>   }<br>};<br><br>int main ()<br>{<br>   trivector a(2, 3, -4);<br><br>   cout &lt;&lt; a.volume() &lt;&lt; endl;<br>   cout &lt;&lt; a.surface() &lt;&lt; endl;<br>   cout &lt;&lt; a.is_negative() &lt;&lt; endl;<br><br>   return 0;<br>}<br><br><br></b></pre>
+    <div align="right">
+      <table style="text-align: left;" border="1" cellpadding="8"
+        cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;
+              background-color: rgb(204, 204, 204);"><small
+                style="font-weight: bold;"><span style="font-family:
+                  sans-serif;">Output</span></small><br>
+            </td>
+          </tr>
+          <tr style="font-family: monospace;">
+            <td style="vertical-align: top;"><b>24<br>
+                6<br>
+                1<br>
+              </b></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <b><br>
+    </b><b> <br>
+    </b><br>
+    <br>
+    <a name="l29"></a><font color="#0f0000" size="+4">29.&nbsp;</font><br>
+    <br>
+    Class derivation allows you to construct more complex classes built
+    from base classes. There is another application of class derivation:
+    allowing the programmer to write generic functions. <br>
+    <br>
+    Suppose you define a base class with no variables. It makes no sense
+    to use instances of that class inside your program. But then you
+    write a function whose purpose it is to sort instances of that
+    class. That function will be able to sort any type of object
+    provided it belongs to a class derived from that base class! The
+    only condition is that inside of each derived class definition, all
+    methods that the sort function needs are correctly defined: <br>
+    <br>
+    <b><br>
+    </b>
+    <pre><b>using namespace std;<br>#include &lt;iostream&gt;<br>#include &lt;cmath&gt;<br><br><span style="color: rgb(255, 0, 0);">class octopus</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">{</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">public:</span><br style="color: rgb(255, 0, 0);"><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">   virtual double module() = 0;  <span style="color: rgb(153, 153, 153);">// = 0 implies function is not</span></span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">                                 // defined. This makes instances</span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">                                 // of this class cannot be declared.</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">};</span><br><br>double biggest_module (octopus &amp;a, octopus &amp;b, octopus &amp;c)<br>{<br>    double r = a.module();<br>    if (b.module() &gt; r) r = b.module();<br>    if (c.module() &gt; r) r = c.module();<br>    return r;<br>}<br><br>class vector<span style="color: rgb(255, 0, 0);">: public octopus</span><br>{<br>public:<br><br>   double x;<br>   double y;<br><br>   vector (double a = 0, double b = 0)<br>   {<br>      x = a;<br>      y = b;<br>   }<br><br>   double module()<br>   {<br>      return sqrt (x * x + y * y);<br>   }<br>};<br><br>class number<span style="color: rgb(255, 0, 0);">: public octopus</span><br>{<br>public:<br><br>   double n;<br><br>   number (double a = 0)<br>   {<br>      n = a;<br>   }<br><br>   double module()<br>   {<br>      if (n &gt;= 0) return n;<br>      else        return -n;<br>   }<br>};<br><br>int main ()<br>{<br>    vector k (1,2), m (6,7), n (100, 0);<br>    number p (5),   q (-3),  r (-150);<br><br>    cout &lt;&lt; biggest_module (k, m, n) &lt;&lt; endl;<br>    cout &lt;&lt; biggest_module (p, q, r) &lt;&lt; endl;<br><br>    cout &lt;&lt; biggest_module (p, q, n) &lt;&lt; endl;<br><br>   return 0;<br>}<br><br><br></b></pre>
+    <div align="right">
+      <table style="text-align: left;" border="1" cellpadding="8"
+        cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;
+              background-color: rgb(204, 204, 204);"><small
+                style="font-weight: bold;"><span style="font-family:
+                  sans-serif;">Output</span></small><br>
+            </td>
+          </tr>
+          <tr style="font-family: monospace;">
+            <td style="vertical-align: top;"><b>100<br>
+                150<br>
+                100<br>
+              </b></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <b><br>
+    </b><b> <br>
+    </b>Perhaps you think "okay, that's a good idea to derive classes
+    from the class <b>octopus</b> because that way I can apply it to
+    instances of my class's methods and function that were designed in a
+    generic way for the <b>octopus</b> class. But what if there's
+    another base class, named <b>cuttlefish</b>, which has very
+    interesting methods and functions too? Do I have to make my choice
+    between <b>octopus</b> and <b>cuttlefish</b> when I want to derive
+    a class?" No, of course not. A derived class can be derived from
+    both <b>octopus</b> and <b>cuttlefish</b>. That's POLYMORPHISM.
+    The derived class simply has to define the methods necessary for <b>octopus</b>
+    together with the methods necessary for <b>cuttlefish</b>: <br>
+    <br>
+    <b><br>
+    </b>
+    <pre><b>class octopus<br>{<br>   virtual double module() = 0;<br>};<br><br>class cuttlefish<br>{<br>   virtual int test() = 0;<br>};<br><br>class vector<span style="color: rgb(255, 0, 0);">: public octopus, public cuttlefish</span><br>{<br>   double x;<br>   double y;<br><br>   <span style="color: rgb(255, 0, 0);">double module ()</span><br>   {<br>      return sqrt (x * x + y * y);<br>   }<br><br>   <span style="color: rgb(255, 0, 0);">int test ()</span><br>   {<br>      if (x &gt; y) return 1;<br>      else       return 0;<br>   }<br>}<br><br></b></pre>
+    <br>
+    <b><br>
+    </b><b> <br>
+    </b><br>
+    <a name="l30"></a><font color="#0f0000" size="+4">30.&nbsp;</font><br>
+    <br>
+    The <b>public:</b> directive means the variables or the methods
+    below can be accessed and used everywhere in the program. <br>
+    <br>
+    If you want the variables and methods to be accessible only to
+    methods of the class AND to methods of derived classes, then you
+    must put the keyword <b>protected:</b> before them. <br>
+    <br>
+    If you want variables or methods to be accessible ONLY to methods of
+    the class, then you must put the keyword <b>private:</b> before
+    them. <br>
+    <br>
+    The fact that variables or methods are declared private or protected
+    means that nothing external to the class can access or use them.
+    That's ENCAPSULATION. (If you want to give a specific function the
+    right to access those variables and methods, then you must include
+    that function's prototype inside the class definition, preceded by
+    the keyword <b>friend</b>.)<br>
+    <br>
+    Good practice is to encapsulate all the variables of a class. This
+    can sound strange if you're used to structs in C. Indeed a struct
+    only makes sense if you can access its data... In C++ you have to
+    create methods to acces the data inside a class. The example below
+    uses the basic example of chapter 17, yet declares the class data to
+    be protected:<br>
+    <br>
+    <br>
+    <b><b> </b></b>
+    <pre><b><b>using namespace std;<br>#include &lt;iostream&gt;<br><br><span style="color: rgb(0, 0, 0);">class</span> vector<br>{<br><span style="color: rgb(255, 0, 0);">protected:</span><br><br>   double x;<br>   double y;<br><br><span style="color: rgb(255, 0, 0);">public:</span><br><br>   <span style="color: rgb(255, 0, 0);">void set_x (int n)</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">   {</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">      x = n;</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">   }</span><br style="color: rgb(255, 0, 0);"><b><b><b><b><pre><span style="color: rgb(255, 0, 0);">   void set_y (int n)</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">   {</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">      y = n;</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">   }</span><br></pre></b></b></b></b>   double surface ()<br>   {<br>      double s;<br>      s = x * y;<br>      if (s &lt; 0) s = -s;<br>      return s;<br>   }<br>};<br><br>int main ()<br>{<br>   vector a;<br><br>   <span style="color: rgb(255, 0, 0);">a.set_x (3);</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">   a.set_y (4);</span><br><br>   cout &lt;&lt; "The surface of a: " &lt;&lt; a.surface() &lt;&lt; endl;<br><br>   return 0;<br>}<br><br><br></b></b></pre>
+    <div align="right">
+      <table style="text-align: left;" border="1" cellpadding="8"
+        cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;
+              background-color: rgb(204, 204, 204);"><small
+                style="font-weight: bold;"><span style="font-family:
+                  sans-serif;">Output</span></small><br>
+            </td>
+          </tr>
+          <tr style="font-family: monospace;">
+            <td style="vertical-align: top;"><b>The surface of a: 12<br>
+              </b></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <b><br>
+    </b><br>
+    The example above is a bit odd since the class data x and y can be
+    set but they cannot be read back. Any attempt in function main () to
+    read <span style="font-weight: bold;">a.x</span> or <span
+      style="font-weight: bold;">a.y</span> will result in a compilation
+    error. In the next example, x and y can be read back:<br>
+    <br>
+    <br>
+    <b style="color: rgb(0, 0, 0);"><b><b><b> </b></b></b></b>
+    <pre><b style="color: rgb(0, 0, 0);"><b><b><b>using namespace std;<br>#include &lt;iostream&gt;<br><br>class vector<br>{<br>protected:<br><br>   double x;<br>   double y;<br><br>public:<br><br>   void set_x (int n)<br>   {<br>      x = n;<br>   }<br></b></b></b></b><pre><b style="color: rgb(0, 0, 0);"><b><b><b><b><b><b><b>   void set_y (int n)<br>   {<br>      y = n;<br>   }<br><br>   <span style="color: rgb(255, 0, 0);">double get_x ()</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">   {</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">      return x;</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">   }</span><br style="color: rgb(255, 0, 0);"></b></b></b></b></b></b></b></b></pre><pre><b style="color: rgb(0, 0, 0);"><b style="color: rgb(0, 0, 0);"><b><b><b><b><pre><span style="color: rgb(255, 0, 0);">   double get_y ()</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">   {</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">      return y;</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">   }</span><br></pre></b></b></b></b></b></b></pre>   double surface ()<br>   {<br>      double s;<br>      s = x * y;<br>      if (s &lt; 0) s = -s;<br>      return s;<br>   }<br>};<br><br>int main ()<br>{<br>   vector a;<br><br>   a.set_x (3);<br>   a.set_y (4);<br><br>   cout &lt;&lt; "The surface of a: " &lt;&lt; a.surface() &lt;&lt; endl;<br>   <span style="color: rgb(255, 0, 0);">cout &lt;&lt; "The width of a:   " &lt;&lt; a.get_x() &lt;&lt; endl;</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">   cout &lt;&lt; "The height of a:  " &lt;&lt; a.get_y() &lt;&lt; endl;</span><br><br>   return 0;<br>}<br><br><br></pre>
+    <span style="font-family: mon;"><span style="font-weight: bold;"></span></span>
+    <div align="right">
+      <table style="text-align: left;" border="1" cellpadding="8"
+        cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;
+              background-color: rgb(204, 204, 204);"><small
+                style="font-weight: bold;"><span style="font-family:
+                  sans-serif;">Output</span></small><br>
+            </td>
+          </tr>
+          <tr style="font-family: monospace;">
+            <td style="vertical-align: top;"><b>The surface of a: 12<br>
+                The width of a:&nbsp;&nbsp; 3<br>
+                The height of a:&nbsp; 4<br>
+              </b></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <b><br>
+    </b><br>
+    In C++ one is not supposed to access the data of a class directly.
+    Methods have to be declared. Why is this? Many reasons exist. One is
+    that this allows you to change the way the data is represented
+    within the class. Another reason is this allows data inside the
+    class to be cross-dependent. Suppose <span style="font-weight:
+      bold;">x</span> and <span style="font-weight: bold;">y</span>
+    must always be of the same sign, otherwise ugly things can happen...
+    If one is allowed to access the class data directly, it would be
+    easy to impose say a positive x and a negative y. In the example
+    below, this is strictly controlled:<br>
+    <br>
+    <br>
+    <b style="color: rgb(0, 0, 0);"><b><b><b><b><b><b><b> </b></b></b></b></b></b></b></b>
+    <pre><b style="color: rgb(0, 0, 0);"><b><b><b><b><b><b><b>using namespace std;<br>#include &lt;iostream&gt;<br><br><span style="color: rgb(255, 0, 0);">int sign (double n)</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">{</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">   if (n &gt;= 0) return 1;</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">   return -1;</span><br style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">}</span><br><br>class vector<br>{<br>protected:<br><br>   double x;<br>   double y;<br><br>public:<br><br>   void set_x (int n)<br>   {<br>      x = n;<br>      <span style="color: rgb(255, 0, 0);">if (sign (x)&nbsp;!= sign(y)) y = -y;</span><br>   }<br><b><b><b><b><pre>   void set_y (int n)<br>   {<br>      y = n;<br>      <span style="color: rgb(255, 0, 0);">if (sign (y)&nbsp;!= sign(x)) x = -x;</span><br>   }<br><br>   double get_x ()<br>   {<br>      return x;<br>   }<br></pre></b></b></b></b></b></b></b></b></b></b></b></b><b><b><b><b><b><b><b><b><pre><b><b><b><b><pre>   double get_y ()<br>   {<br>      return y;<br>   }<br></pre></b></b></b></b></pre></b></b></b></b></b></b></b></b>   double surface ()<br>   {<br>      double s;<br>      s = x * y;<br>      if (s &lt; 0) s = -s;<br>      return s;<br>   }<br>};<br><br>int main ()<br>{<br>   vector a;<br><br>   a.set_x (-3);<br>   a.set_y (4);<br><br>   cout &lt;&lt; "The surface of a: " &lt;&lt; a.surface() &lt;&lt; endl;<br>   cout &lt;&lt; "The width of a:   " &lt;&lt; a.get_x() &lt;&lt; endl;<br>   cout &lt;&lt; "The height of a:  " &lt;&lt; a.get_y() &lt;&lt; endl;<br><br>   return 0;<br>}<br><br><br></pre>
+    <div align="right">
+      <table style="text-align: left;" border="1" cellpadding="8"
+        cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;
+              background-color: rgb(204, 204, 204);"><small
+                style="font-weight: bold;"><span style="font-family:
+                  sans-serif;">Output</span></small><br>
+            </td>
+          </tr>
+          <tr style="font-family: monospace;">
+            <td style="vertical-align: top;"><b>The surface of a: 12<br>
+                The width of a:&nbsp;&nbsp; 3<br>
+                The height of a:&nbsp; 4<br>
+              </b></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <b><br>
+    </b><br>
+    <br>
+    <br>
+    <a name="l31"></a><font color="#0f0000" size="+4">31.&nbsp;</font><br>
+    <br>
+    Let's talk about input/output. In C++ that's a very broad subject. <br>
+    <br>
+    Here is a program that writes to a file: <br>
+    <br>
+    <b><br>
+      <pre>using namespace std;<br>#include &lt;iostream&gt;<br>#include &lt;fstream&gt;<br><br>int main ()<br>{<br>   fstream f;<br><br>   f.open("test.txt", ios::out);<br><br>   f &lt;&lt; "This is a text output to a file." &lt;&lt; endl;<br><br>   double a = 345;<br><br>   f  &lt;&lt; "A number: " &lt;&lt; a &lt;&lt; endl;<br><br>   f.close();<br><br>   return 0;<br>}<br><br><br></pre>
+    </b>
+    <div align="right">
+      <table style="text-align: left;" border="1" cellpadding="8"
+        cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;
+              background-color: rgb(204, 204, 204);">
+              <div style=""><small style="font-weight: bold;"><span
+                    style="font-family: sans-serif;">Content of file
+                    test.txt</span></small></div>
+            </td>
+          </tr>
+          <tr style="font-family: monospace;">
+            <td style="vertical-align: top;"><b>This is a text output to
+                a file.<br>
+                A number: 345<br>
+              </b></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <b><br>
+    </b><b> <br>
+    </b>Here is a program that reads from a file: <br>
+    <b><br>
+      <pre><br><br>using namespace std;<br>#include &lt;iostream&gt;<br>#include &lt;fstream&gt;<br><br>int main ()<br>{<br>   fstream f;<br>   char c;<br><br>   cout &lt;&lt; "What's inside the test.txt file" &lt;&lt; endl;<br>   cout &lt;&lt; endl;<br><br>   f.open("test.txt", ios::in);<br><br>   while (! f.eof() )<br>   {<br>      f.get(c);                          <span style="color: rgb(153, 153, 153);">// Or c = f.get()</span><br>      cout &lt;&lt; c;<br>   }<br><br>   f.close();<br><br>   return 0;<br>}<br><br><br></pre>
+    </b>
+    <div align="right">
+      <table style="text-align: left;" border="1" cellpadding="8"
+        cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;
+              background-color: rgb(204, 204, 204);"><small
+                style="font-weight: bold;"><span style="font-family:
+                  sans-serif;">Output</span></small><br>
+            </td>
+          </tr>
+          <tr style="font-family: monospace;">
+            <td style="vertical-align: top;"><b>This is a text output to
+                a file.<br>
+                A number: 345<br>
+              </b></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <b><br>
+    </b><b> <br>
+    </b><br>
+    <br>
+    <a name="l32"></a><font color="#0f0000" size="+4">32.&nbsp;</font><br>
+    <br>
+    Generally speaking, it is possible to do on character arrays the
+    same operations as on files. This is very useful to convert data or
+    manage memory arrays. <br>
+    <br>
+    Here is a program that writes inside a character array: <br>
+    <br>
+    <b><br>
+    </b>
+    <pre><b>using namespace std;<br>#include &lt;iostream&gt;<br>#include &lt;strstream&gt;<br>#include &lt;cstring&gt;<br>#include &lt;cmath&gt;<br><br>int main ()<br>{<br>   char a[1024];<br>   ostrstream b(a, 1024);<br><br>   b.seekp(0);                           <span style="color: rgb(153, 153, 153);">// Start from first char.</span><br>   b &lt;&lt; "2 + 2 = " &lt;&lt; 2 + 2 &lt;&lt; ends;     <span style="color: rgb(153, 153, 153);">// ( ends, not endl )</span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">                                         // ends is simply the</span><br style="color: rgb(153, 153, 153);"><span style="color: rgb(153, 153, 153);">                                         // null character   '\0'</span><br>   cout &lt;&lt; a &lt;&lt; endl;<br><br>   double v = 2;<br><br>   strcpy (a, "A sinus: ");<br><br>   b.seekp(strlen (a));<br>   b &lt;&lt; "sin (" &lt;&lt; v &lt;&lt; ") = " &lt;&lt; sin(v) &lt;&lt; ends;<br><br>   cout &lt;&lt; a &lt;&lt; endl;<br><br>   return 0;<br>}<br><br><br></b></pre>
+    <div align="right">
+      <table style="text-align: left;" border="1" cellpadding="8"
+        cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;
+              background-color: rgb(204, 204, 204);"><small
+                style="font-weight: bold;"><span style="font-family:
+                  sans-serif;">Output</span></small><br>
+            </td>
+          </tr>
+          <tr style="font-family: monospace;">
+            <td style="vertical-align: top;"><b>2 + 2 = 4<br>
+                A sinus: sin (2) = 0.909297<br>
+              </b></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <b><br>
+    </b><b> <br>
+    </b>A program that reads from a character string: <br>
+    <br>
+    <b><br>
+      <pre>using namespace std;<br>#include &lt;iostream&gt;<br>#include &lt;strstream&gt;<br>#include &lt;cstring&gt;<br><br>int main ()<br>{<br>   char a[1024];<br>   istrstream b(a, 1024);<br><br>   strcpy (a, "45.656");<br><br>   double k, p;<br><br>   b.seekg(0);                       <span style="color: rgb(153, 153, 153);">// Start from first character.</span><br>   b &gt;&gt; k;<br><br>   k = k + 1;<br><br>   cout &lt;&lt; k &lt;&lt; endl;<br><br>   strcpy (a, "444.23 56.89");<br><br>   b.seekg(0);<br>   b &gt;&gt; k &gt;&gt; p;<br><br>   cout &lt;&lt; k &lt;&lt; ", " &lt;&lt; p + 1 &lt;&lt; endl;<br><br>   return 0;<br>}<br><br><br></pre>
+    </b>
+    <div align="right">
+      <table style="text-align: left;" border="1" cellpadding="8"
+        cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;
+              background-color: rgb(204, 204, 204);"><small
+                style="font-weight: bold;"><span style="font-family:
+                  sans-serif;">Output</span></small><br>
+            </td>
+          </tr>
+          <tr style="font-family: monospace;">
+            <td style="vertical-align: top;"><b>46.656<br>
+                444.23, 57.89<br>
+              </b></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <b><br>
+    </b><br>
+    <br>
+    <br>
+    <a name="l33"></a><font color="#0f0000" size="+4">33.&nbsp;</font><br>
+    <br>
+    This program performs formatted output two different ways. Please
+    note the <b>width()</b> and <b>setw()</b> MODIFIERS are only
+    effective on the next item output to the stream. Subsequent items
+    will not be influenced. <br>
+    <br>
+    <b><br>
+      <pre>using namespace std;<br>#include &lt;iostream&gt;<br>#include &lt;iomanip&gt;<br><br>int main ()<br>{<br>   int i;<br><br>   cout &lt;&lt; "A list of numbers:" &lt;&lt; endl;<br>   for (i = 1; i &lt;= 1024; i *= 2)<br>   {<br>      cout.width (7);<br>      cout &lt;&lt; i &lt;&lt; endl;<br>   }<br><br>   cout &lt;&lt; "A table of numbers:" &lt;&lt; endl;<br>   for (i = 0; i &lt;= 4; i++)<br>   {<br>      cout &lt;&lt; setw(3) &lt;&lt; i &lt;&lt; setw(5) &lt;&lt; i * i * i &lt;&lt; endl;<br>   }<br><br>   return 0;<br>}<br><br><br></pre>
+    </b>
+    <div align="right">
+      <table style="text-align: left;" border="1" cellpadding="8"
+        cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;
+              background-color: rgb(204, 204, 204);"><small
+                style="font-weight: bold;"><span style="font-family:
+                  sans-serif;">Output</span></small><br>
+            </td>
+          </tr>
+          <tr style="font-family: monospace;">
+            <td style="vertical-align: top;"><b>A list of numbers:<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 8<br>
+                &nbsp;&nbsp;&nbsp;&nbsp; 16<br>
+                &nbsp;&nbsp;&nbsp;&nbsp; 32<br>
+                &nbsp;&nbsp;&nbsp;&nbsp; 64<br>
+                &nbsp;&nbsp;&nbsp; 128<br>
+                &nbsp;&nbsp;&nbsp; 256<br>
+                &nbsp;&nbsp;&nbsp; 512<br>
+                &nbsp;&nbsp; 1024<br>
+                A table of numbers:<br>
+                &nbsp; 0&nbsp;&nbsp;&nbsp; 0<br>
+                &nbsp; 1&nbsp;&nbsp;&nbsp; 1<br>
+                &nbsp; 2&nbsp;&nbsp;&nbsp; 8<br>
+                &nbsp; 3&nbsp;&nbsp; 27<br>
+                &nbsp; 4&nbsp;&nbsp; 64<br>
+              </b></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <b><br>
+    </b><b> <br>
+    </b>You now have a basic knowledge about C++. Inside good books you
+    will learn many more things. The file management system is very
+    powerful, it has many other possibilities than those illustrated
+    here. There is also a lot more to say about classes: template
+    classes, virtual classes... <br>
+    <br>
+    In order to work efficiently with C++ you will need a good reference
+    book, just like you need one for C. You will also need information
+    on how C++ is used in your particular domain of activity. The
+    standards, the global approach, the tricks, the typical problems
+    encountered and their solutions... The best reference is of course
+    the books written by Bjarne Stroustrup himself (I don't recall which
+    of them I read). The following book contains almost every detail
+    about C and C++, it is constructed in a way similar to this text and
+    it contains a CD: <br>
+    <br>
+    Jamsa's C/C++ Programmer's Bible<br>
+    &amp;copyright; 1998 Jamsa Press<br>
+    Las Vegas, United States<br>
+    <br>
+    French edition:<br>
+    C/C++ La Bible du programmeur<br>
+    Kris Jamsa, Ph.D - Lars Klander<br>
+    France&nbsp;: Editions Eyrolles<br>
+    <a href="http://www.eyrolles.com/">www.eyrolles.com</a><br>
+    Canada&nbsp;: Les Editions Reynald Goulet inc.<br>
+    <a href="http://www.goulet.ca/">www.goulet.ca</a><br>
+    ISBN 2-212-09058-7<br>
+    <br>
+    It has been obsoleted and is now:<br>
+    Jamsa's C/C++/C# Programmer's Bible<br>
+    Onword Press<br>
+    <br>
+    <br>
+    Other reference: <br>
+    <br>
+    <b>accu</b>:&nbsp; <a
+      href="http://www.accu.org/bookreviews/public/reviews/0hr/index.htm">www.accu.org/bookreviews/public/reviews/0hr/index.htm</a><br>
+    <br>
+    CoderSource.net:&nbsp; <a href="http://www.codersource.net/">www.codersource.net/</a><br>
+    <br>
+    C++ Guide:&nbsp; <a
+      href="http://google-styleguide.googlecode.com/svn/trunk/cppguide.xml">google-styleguide.googlecode.com/svn/trunk/cppguide.xml</a><br>
+    <br>
+    <br>
+    <!--A printed version of this tutorial is available at <a href="http://www.lulu.com/content/258714">http://www.lulu.com/content/258714</a><br>
+<br>--> A similar tutorial for Ada is available at&nbsp; <a
+      href="http://www.adahome.com/Ammo/cpp2ada.html">www.adahome.com/Ammo/cpp2ada.html</a><br>
+    <br>
+    A Haskell tutorial by a C programmer:&nbsp; <a
+      href="http://learnyouahaskell.com/">learnyouahaskell.com</a><br>
+    <br>
+    <br>
+    This page <span style="font-weight: bold;">translated in
+      Belorussian</span>: <a
+      href="http://www.webhostinghub.com/support/cppcen-be">www.webhostinghub.com/support/cppcen-be</a><br>
+    <br>
+    This page <span style="font-weight: bold;">translated in Spanish</span>:
+    <a href="http://www.bigdaddysoftware.com/c-tutorial">www.bigdaddysoftware.com/c-tutorial</a><br>
+    <br>
+    I wish to thank Didier Bizzarri, <a
+      href="http://hytti.uku.fi/%7Etronkko">Toni Ronkko</a>, <a
+      href="http://www.4p8.com/">Fr&eacute;d&eacute;ric Cloth</a>, Jack Lam, <a
+      href="http://www.wtf.dk/hp">Morten Brix Pedersen</a>, Elmer
+    Fittery, Ana Yuseepi, William L. Dye, Bahjat F. Qaqish, Muthukumar
+    Veluswamy, Marco Cimarosti, Jarrod Miller, Nikolaos Pothitos, <a
+      href="http://blog.donews.com/ralix">Ralph Wu</a>, Dave
+    Abercrombie, Alex Pennington, Scott Marsden, Robert Krten, Dave
+    Panter, Cihat Imamoglu, Bohdan Zograf, David L. Markowitz and Marko
+    Pozner for their inspiration, advice, help, data, bug reports,
+    references, enhancement of the English wording and translation. <br>
+    <br>
+    <br>
+    <br>
+    <div align="right">Eric Brasseur &nbsp; - &nbsp; February 23
+      1998&nbsp; till&nbsp; November 24 2012 </div>
+  </body>
+</html>
